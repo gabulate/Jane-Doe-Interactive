@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Proyecto_Gabriel_Ulate_Melany_Vargas.Controllers
+namespace Web.Controllers
 {
     public class HomeController : Controller
     {

@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace Proyecto_Gabriel_Ulate_Melany_Vargas
+namespace Web
 {
     public class BundleConfig
     {

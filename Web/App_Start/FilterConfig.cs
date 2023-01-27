@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace Proyecto_Gabriel_Ulate_Melany_Vargas
+namespace Web
 {
     public class FilterConfig
     {

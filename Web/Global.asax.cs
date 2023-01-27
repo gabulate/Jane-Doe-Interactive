@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
-namespace Proyecto_Gabriel_Ulate_Melany_Vargas
+namespace Web
 {
     public class MvcApplication : System.Web.HttpApplication
     {

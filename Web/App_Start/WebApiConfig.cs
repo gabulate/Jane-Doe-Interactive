@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
-namespace Proyecto_Gabriel_Ulate_Melany_Vargas
+namespace Web
 {
     public static class WebApiConfig
     {
