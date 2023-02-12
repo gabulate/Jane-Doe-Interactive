@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8ba8c22cc98b490995c6f8997cdcbb2a" Name="Diagram1">
+        <EntityTypeShape EntityType="CondominiosDBModel.AreaComun" Width="1.5" PointX="6" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CondominiosDBModel.CondicionResidencia" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CondominiosDBModel.Deuda" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="CondominiosDBModel.EstadoIncidente" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CondominiosDBModel.Incidente" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CondominiosDBModel.Informacion" Width="1.5" PointX="10" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CondominiosDBModel.PlanCobro" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CondominiosDBModel.Reservacion" Width="1.5" PointX="8.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CondominiosDBModel.Residencia" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CondominiosDBModel.RubroCobro" Width="1.5" PointX="7.5" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CondominiosDBModel.TipoInformacion" Width="1.5" PointX="7.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CondominiosDBModel.TipoUsuario" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CondominiosDBModel.Usuario" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <AssociationConnector Association="CondominiosDBModel.FK_Reservacion_AreaComun" ManuallyRouted="false" />
+        <AssociationConnector Association="CondominiosDBModel.FK_Residencia_CondicionResidencia" ManuallyRouted="false" />
+        <AssociationConnector Association="CondominiosDBModel.FK_Deuda_PlanCobro" ManuallyRouted="false" />
+        <AssociationConnector Association="CondominiosDBModel.FK_Deuda_Residencia" ManuallyRouted="false" />
+        <AssociationConnector Association="CondominiosDBModel.FK_Incidente_EstadoIncidente" ManuallyRouted="false" />
+        <AssociationConnector Association="CondominiosDBModel.FK_Incidente_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="CondominiosDBModel.FK_Informacion_TipoInformacion" ManuallyRouted="false" />
+        <AssociationConnector Association="CondominiosDBModel.FK_Reservacion_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="CondominiosDBModel.FK_Residencia_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="CondominiosDBModel.FK_Usuario_TipoUsuario" ManuallyRouted="false" />
+        <AssociationConnector Association="CondominiosDBModel.PlanCobro_RubroCobro" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
