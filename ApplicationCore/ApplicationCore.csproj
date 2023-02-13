@@ -57,10 +57,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IServiceDeuda.cs" />
+    <Compile Include="Services\IServiceInformacion.cs" />
+    <Compile Include="Services\IServiceResidencia.cs" />
+    <Compile Include="Services\IServiceUsuario.cs" />
+    <Compile Include="Services\ServiceDeuda.cs" />
+    <Compile Include="Services\ServiceInformacion.cs" />
+    <Compile Include="Services\ServiceResidencia.cs" />
+    <Compile Include="Services\ServiceUsuario.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
+      <Project>{6172BF9B-7DE4-43E2-8609-908D5963EFEE}</Project>
+      <Name>Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
