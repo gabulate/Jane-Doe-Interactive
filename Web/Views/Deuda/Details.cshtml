@@ -1,0 +1,57 @@
+﻿@model Infrastructure.Models.Deuda
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalle del Estado de Cuenta</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PendientePago)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PendientePago)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MontoPagado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MontoPagado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Borrado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Borrado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlanCobro.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlanCobro.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Residencia.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Residencia.Id)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

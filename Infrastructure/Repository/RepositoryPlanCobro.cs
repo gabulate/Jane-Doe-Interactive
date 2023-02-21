@@ -10,28 +10,30 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repository
 {
-    public class RepositoryResidencia : IRepositoryResidencia
+    public class RepositoryPlanCobro : IRepositoryPlanCobro
     {
-        public void DeleteResidencia(int id)
+        public void DeletePlanCobro(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Residencia> GetResidencia()
+        public IEnumerable<PlanCobro> GetPlanCobro()
         {
-            IEnumerable<Residencia> lista = null;
+            IEnumerable<PlanCobro> lista = null;
             try
             {
+
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    //Obtener todos las residencias incluyendo el propietario
-                    lista = ctx.Residencia.Include("Usuario").Include("CondicionResidencia").ToList();
 
+                    //lista= from plan in ctx.PlanCobro select plan;
+
+                    lista = ctx.PlanCobro.
+                        Include("RubroCobro").ToList();
                 }
                 return lista;
             }
-
             catch (DbUpdateException dbEx)
             {
                 string mensaje = "";
@@ -46,21 +48,20 @@ namespace Infrastructure.Repository
             }
         }
 
-        public Residencia GetResidenciaById(int id)
+        public PlanCobro GetPlanCobroByID(int id)
         {
-            Residencia residencia = null;
+            PlanCobro planCobro = null;
             try
             {
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    residencia = ctx.Residencia.
-                        Where(r => r.Id == id).
-                        Include("Usuario").
-                        Include("CondicionResidencia").
+                    planCobro = ctx.PlanCobro.
+                        Where(p => p.Id == id).
+                        Include("RubroCobro").
                         FirstOrDefault();
                 }
-                return residencia;
+                return planCobro;
             }
             catch (DbUpdateException dbEx)
             {
@@ -76,7 +77,7 @@ namespace Infrastructure.Repository
             }
         }
 
-        public Residencia Save(Residencia residencia)
+        public PlanCobro Save(PlanCobro planCobro, string[] selectedRubrosCobro)
         {
             throw new NotImplementedException();
         }

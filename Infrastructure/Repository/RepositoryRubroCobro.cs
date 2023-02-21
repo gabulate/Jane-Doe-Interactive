@@ -2,7 +2,6 @@
 using Infrastructure.Utils;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
@@ -10,28 +9,20 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repository
 {
-    public class RepositoryResidencia : IRepositoryResidencia
+    public class RepositoryRubroCobro : IRepositoryRubroCobro
     {
-        public void DeleteResidencia(int id)
+        public IEnumerable<RubroCobro> GetRubroCobro()
         {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Residencia> GetResidencia()
-        {
-            IEnumerable<Residencia> lista = null;
             try
             {
-                using (MyContext ctx = new MyContext())
+                IEnumerable<RubroCobro> lista = null;
+                using(MyContext ctx=new MyContext()) 
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    //Obtener todos las residencias incluyendo el propietario
-                    lista = ctx.Residencia.Include("Usuario").Include("CondicionResidencia").ToList();
-
+                    lista=ctx.RubroCobro.ToList<RubroCobro>();
                 }
                 return lista;
             }
-
             catch (DbUpdateException dbEx)
             {
                 string mensaje = "";
@@ -46,21 +37,17 @@ namespace Infrastructure.Repository
             }
         }
 
-        public Residencia GetResidenciaById(int id)
+        public RubroCobro GetRubroCobroByID(int id)
         {
-            Residencia residencia = null;
+            RubroCobro rubro = null;
             try
             {
-                using (MyContext ctx = new MyContext())
+                using(MyContext ctx= new MyContext())
                 {
-                    ctx.Configuration.LazyLoadingEnabled = false;
-                    residencia = ctx.Residencia.
-                        Where(r => r.Id == id).
-                        Include("Usuario").
-                        Include("CondicionResidencia").
-                        FirstOrDefault();
+                    ctx.Configuration.LazyLoadingEnabled=false;
+                    rubro = ctx.RubroCobro.Find();
                 }
-                return residencia;
+                return rubro;
             }
             catch (DbUpdateException dbEx)
             {
@@ -76,9 +63,5 @@ namespace Infrastructure.Repository
             }
         }
 
-        public Residencia Save(Residencia residencia)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

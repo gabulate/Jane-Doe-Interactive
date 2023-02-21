@@ -10,6 +10,7 @@ namespace ApplicationCore.Services
     public interface IServiceUsuario
     {
         IEnumerable<Usuario> GetUsuario();
+        //IEnumerable<Usuario> GetUsuarios();
         Usuario GetUsuarioById(int id);
         void DeleteUsuario(int id);
         Usuario Save(Usuario usuario);

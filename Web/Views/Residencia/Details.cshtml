@@ -1,0 +1,67 @@
+﻿@model Infrastructure.Models.Residencia
+
+@{
+    ViewBag.Title = "Detalle Residencia";
+}
+
+<h2>Detalle Residencia</h2>
+
+<div>
+    <h4>Residencia</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        @*NUM DE CONDOMINIO*@
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        @*DUEÑO*@
+        <dt>
+            @Html.DisplayNameFor(model => model.Usuario.Nombre)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Usuario.Nombre)
+        </dd>
+        @*CANTIDAD DE PERSONAS*@
+        <dt>
+            @Html.DisplayNameFor(model => model.Habitantes)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Habitantes)
+        </dd>
+        @*AÑO DE CONSTRUCCION*@
+        <dt>
+            @Html.DisplayNameFor(model => model.AnioConstrucion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AnioConstrucion.Value.Year)
+        </dd>
+        @*CONDICION*@
+        <dt>
+            @Html.DisplayNameFor(model => model.CondicionResidencia.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CondicionResidencia.Descripcion)
+        </dd>
+        @*CANT DE VEHICULOS*@
+        <dt>
+            @Html.DisplayNameFor(model => model.Vehiculos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vehiculos)
+        </dd>
+
+
+
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

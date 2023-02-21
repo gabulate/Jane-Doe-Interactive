@@ -26,7 +26,9 @@ namespace Infrastructure.Repository
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
                     //Obtener todos los Usuarios incluyendo el autor
-                    lista = ctx.Deuda.Include("PlanCobro").Include("Residencia").ToList();
+                    lista = ctx.Deuda.
+                        Include("PlanCobro").Include("Residencia").Include("Usuario").
+                        ToList();
 
                 }
                 return lista;
@@ -46,6 +48,7 @@ namespace Infrastructure.Repository
             }
         }
 
+
         public Deuda GetDeudaByIdResidencia(int idResidencia)
         {
             Deuda deuda = null;
@@ -54,7 +57,10 @@ namespace Infrastructure.Repository
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    deuda = ctx.Deuda.Where(u => u.IdResidencia == idResidencia).Include("PlanCobro").Include("Residencia").FirstOrDefault();
+                    deuda = ctx.Deuda.
+                        Where(u => u.IdResidencia == idResidencia).
+                        Include("PlanCobro").Include("Residencia").Include("Usuario").
+                        FirstOrDefault();
                 }
                 return deuda;
             }
