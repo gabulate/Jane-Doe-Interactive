@@ -27,7 +27,7 @@ namespace Infrastructure.Repository
                     ctx.Configuration.LazyLoadingEnabled = false;
                     //Obtener todos los Usuarios incluyendo el autor
                     lista = ctx.Deuda.
-                        Include("PlanCobro").Include("Residencia").Include("Usuario").
+                        Include("PlanCobro").Include("Residencia").Include("Residencia.Usuario").
                         ToList();
 
                 }

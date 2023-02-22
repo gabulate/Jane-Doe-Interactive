@@ -20,6 +20,10 @@ namespace Web.Controllers
             {
                 IServiceDeuda _ServiceDeuda = new ServiceDeuda();
                 lista = _ServiceDeuda.GetDeuda();
+                ViewBag.title = "Lista Deudas";
+                //Lista Propietarios
+                IServiceResidencia _ServiceResidencia = new ServiceResidencia();
+                ViewBag.listaResidencia = _ServiceResidencia.GetResidencia();
                 return View(lista);
             }
             catch (Exception ex)
