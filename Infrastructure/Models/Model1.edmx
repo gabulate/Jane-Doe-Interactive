@@ -71,7 +71,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Descripcion" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="MontoTotal" Type="money" Nullable="false" />
           <Property Name="Borrado" Type="bit" Nullable="false" />
         </EntityType>
@@ -113,7 +113,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Descripcion" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Costo" Type="money" Nullable="false" />
           <Property Name="Borrado" Type="bit" Nullable="false" />
         </EntityType>
@@ -418,7 +418,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="MontoTotal" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="Borrado" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="RubroCobro" Relationship="Self.PlanCobro_RubroCobro" FromRole="PlanCobro" ToRole="RubroCobro" />
@@ -459,7 +459,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Costo" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="Borrado" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="PlanCobro" Relationship="Self.PlanCobro_RubroCobro" FromRole="RubroCobro" ToRole="PlanCobro" />

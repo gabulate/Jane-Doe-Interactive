@@ -15,9 +15,9 @@ namespace Infrastructure.Models
 using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-
+    
     [MetadataType(typeof(CondicionResidenciaMetadata))]
-    public partial class CondicionResidencia
+public partial class CondicionResidencia
 {
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]

@@ -17,8 +17,8 @@ using System;
     using System.ComponentModel.DataAnnotations;
 
     [MetadataType(typeof(PlanCobroMetadata))]
-    public partial class PlanCobro
-{
+public partial class PlanCobro
+    {
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
     public PlanCobro()

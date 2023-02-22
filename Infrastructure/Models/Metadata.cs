@@ -67,7 +67,7 @@ namespace Infrastructure.Models
         public decimal MontoTotal { get; set; }
         public bool Borrado { get; set; }
 
-        [Display(Name = "Rubro de Cobro")]
+        [Display(Name = "Rubros de Cobro")]
         public virtual ICollection<RubroCobro> RubroCobro { get; set; }
 
     }
