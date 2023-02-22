@@ -10,27 +10,18 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.PendientePago)
+            @Html.DisplayNameFor(model => model.Residencia.Usuario.Nombre)
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.PendientePago)
+            @Html.DisplayFor(model => model.Residencia.Usuario.Nombre) 
+            @Html.DisplayFor(model => model.Residencia.Usuario.Apellido)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.MontoPagado)
+            @Html.DisplayNameFor(model => model.Residencia.Id)
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.MontoPagado)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Borrado)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Borrado)
+            @Html.DisplayFor(model => model.Residencia.Id)
         </dd>
 
         <dt>
@@ -42,13 +33,32 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Residencia.Id)
+            @Html.DisplayNameFor(model => model.Fecha)
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.Residencia.Id)
+            @Html.DisplayFor(model => model.Fecha)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.PendientePago)
+        </dt>
+        <dd>
+            @Html.Encode(Model.PendientePago ? "Pendiente" : "Pagado")
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MontoPagado)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MontoPagado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlanCobro.MontoTotal)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PlanCobro.MontoTotal)
+        </dd>
     </dl>
 </div>
 <p>

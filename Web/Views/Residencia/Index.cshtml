@@ -20,6 +20,7 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Usuario.Nombre)
+            
         </th>
         <th></th>
     </tr>
@@ -34,7 +35,8 @@
                 @Html.DisplayFor(modelItem => item.CondicionResidencia.Descripcion)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Usuario.Nombre )
+                @Html.DisplayFor(modelItem => item.Usuario.Nombre)
+                @Html.DisplayFor(modelItem => item.Usuario.Apellido)
             </td>
             <td>
                 @*<a href="@Url.Action("Edit", "Residencia", new {id=item.Id})"

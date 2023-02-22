@@ -49,7 +49,7 @@ namespace Infrastructure.Repository
         }
 
 
-        public Deuda GetDeudaByIdResidencia(int idResidencia)
+        public Deuda GetDeudaById(int id)
         {
             Deuda deuda = null;
             try
@@ -58,8 +58,8 @@ namespace Infrastructure.Repository
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
                     deuda = ctx.Deuda.
-                        Where(u => u.IdResidencia == idResidencia).
-                        Include("PlanCobro").Include("Residencia").Include("Usuario").
+                        Where(u => u.Id == id).
+                        Include("PlanCobro").Include("Residencia").Include("Residencia.Usuario").
                         FirstOrDefault();
                 }
                 return deuda;

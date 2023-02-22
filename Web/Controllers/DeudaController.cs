@@ -49,7 +49,7 @@ namespace Web.Controllers
                     return RedirectToAction("Index");
                 }
                 //LÍNEA 48 DA PROBLEMAS!!!!!!!!!! ERROR 404
-                //deuda=_ServiceDeuda.GetDeudaByIdResidencia(Convert.ToInt32(id)); 
+                deuda=_ServiceDeuda.GetDeudaById(Convert.ToInt32(id)); 
                 if(deuda==null)
                 {
                     TempData["Message"] = "No existe el deuda solicitado";

@@ -22,10 +22,10 @@ namespace ApplicationCore.Services
             return rep.GetDeuda();
         }
 
-        public Deuda GetDeudaByIdResidencia(int id)
+        public Deuda GetDeudaById(int id)
         {
             IRepositoryDeuda rep = new RepositoryDeuda();
-            return rep.GetDeudaByIdResidencia(id);
+            return rep.GetDeudaById(id);
         }
 
         public Deuda Save(Deuda deuda)

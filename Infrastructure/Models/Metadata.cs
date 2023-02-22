@@ -63,6 +63,7 @@ namespace Infrastructure.Models
         [Display(Name = "Monto Total")]
         [DisplayFormat(DataFormatString = "{0:C}")]  //para agregar signo de colones. el 0 reemplaza con el valor que representa. El C representa el signo de de colones
         [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})?$")]
+
         public decimal MontoTotal { get; set; }
         public bool Borrado { get; set; }
 
@@ -90,5 +91,29 @@ namespace Infrastructure.Models
         [DisplayFormat(DataFormatString = "{0:C}")]
         [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})?$")]
         public decimal Costo { get; set; }
+    }
+
+    internal partial class DeudaMetadata
+    {
+        [Display(Name = "Código de Residencia")]
+        public int IdResidencia { get; set; }
+
+        public int IdPlanCobro { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:MMMM-yyyy}")]
+        public System.DateTime Fecha { get; set; }
+
+        [Display(Name = "Pendiente de pago")]
+        public bool PendientePago { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:C}")]
+        [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})?$")]
+        [Display(Name = "Monto Pagado")]
+        public decimal MontoPagado { get; set; }
+
+        public bool Borrado { get; set; }
+
+        [Display(Name = "Número de factura")]
+        public int Id { get; set; }
     }
 }

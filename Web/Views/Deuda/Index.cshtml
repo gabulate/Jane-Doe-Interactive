@@ -16,16 +16,13 @@
             @Html.DisplayNameFor(model => model.Residencia.Usuario.Nombre)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.IdResidencia)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.PendientePago)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.MontoPagado)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.PlanCobro.Descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Residencia.Id)
         </th>
         <th></th>
     </tr>
@@ -34,21 +31,20 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Residencia.Usuario.Nombre)
+            @Html.DisplayFor(modelItem => item.Residencia.Usuario.Apellido)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.PendientePago)
+            @Html.DisplayFor(modelItem => item.IdResidencia)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.MontoPagado)
+            @*Cambia el texto dependiendo del valor*@
+            @Html.Encode(item.PendientePago ? "Pendiente" : "Pagado")
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.PlanCobro.Descripcion)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Residencia.Id)
-        </td>
-        <td>
-            <a href="@Url.Action("Details", "Deuda", new {id=item.Fecha})"
+            <a href="@Url.Action("Details", "Deuda", new {id=item.Id})"
                class="btn btn-primary">Detalles</a>
         </td>
     </tr>
