@@ -1,67 +1,78 @@
-﻿@model Infrastructure.Models.Deuda
+﻿@model Infrastructure.Models.Residencia
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Detalle del Estado de Cuenta</h2>
-
 <div>
+    <h4>Listado de deudas</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Residencia.Usuario.Nombre)
+            @Html.DisplayNameFor(model => model.Usuario.Nombre)
         </dt>
+
         <dd>
-            @Html.DisplayFor(model => model.Residencia.Usuario.Nombre) 
-            @Html.DisplayFor(model => model.Residencia.Usuario.Apellido)
+            @Html.DisplayFor(model => model.Usuario.Nombre)
+            @Html.DisplayFor(model => model.Usuario.Apellido)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Residencia.Id)
+            @Html.DisplayNameFor(model => model.Id)
         </dt>
+
         <dd>
-            @Html.DisplayFor(model => model.Residencia.Id)
+            @Html.DisplayFor(model => model.Id)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.PlanCobro.Descripcion)
+            @Html.DisplayNameFor(model => model.Deuda)
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PlanCobro.Descripcion)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Fecha)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Fecha)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PendientePago)
-        </dt>
-        <dd>
-            @Html.Encode(Model.PendientePago ? "Pendiente" : "Pagado")
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MontoPagado)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.MontoPagado)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PlanCobro.MontoTotal)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.PlanCobro.MontoTotal)
-        </dd>
     </dl>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Deuda.FirstOrDefault().PlanCobro.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Deuda.FirstOrDefault().Fecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Deuda.FirstOrDefault().PendientePago)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Deuda.FirstOrDefault().MontoPagado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Deuda.FirstOrDefault().PlanCobro.MontoTotal)
+            </th>
+        </tr>
+
+        @foreach (var item in Model.Deuda)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlanCobro.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fecha)
+                </td>
+                <td>
+                    @Html.Encode(item.PendientePago ? "Pendiente" : "Pagado")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MontoPagado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlanCobro.MontoTotal)
+                </td>
+            </tr>
+        }
+
+    </table>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

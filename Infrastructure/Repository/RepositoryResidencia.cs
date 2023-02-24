@@ -26,7 +26,11 @@ namespace Infrastructure.Repository
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
                     //Obtener todos las residencias incluyendo el propietario
-                    lista = ctx.Residencia.Include("Usuario").Include("CondicionResidencia").ToList();
+                    lista = ctx.Residencia.Include("Usuario")
+                        .Include("CondicionResidencia")
+                        .Include("Deuda")
+                        .Include("Deuda.PlanCobro")
+                        .ToList();
 
                 }
                 return lista;
@@ -54,11 +58,13 @@ namespace Infrastructure.Repository
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    residencia = ctx.Residencia.
-                        Where(r => r.Id == id).
-                        Include("Usuario").
-                        Include("CondicionResidencia").
-                        FirstOrDefault();
+                    residencia = ctx.Residencia
+                        .Where(r => r.Id == id)
+                        .Include("Usuario")
+                        .Include("CondicionResidencia")
+                        .Include("Deuda")
+                        .Include("Deuda.PlanCobro")
+                        .FirstOrDefault();
                 }
                 return residencia;
             }

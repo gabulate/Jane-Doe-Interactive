@@ -21,7 +21,8 @@ namespace Infrastructure.Repository
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
                     //Obtener todos los Usuarios incluyendo el autor
-                    lista = ctx.Usuario.Include("TipoUsuario").ToList();
+                    lista = ctx.Usuario.Include("TipoUsuario")
+                        .ToList();
 
                 }
                 return lista;

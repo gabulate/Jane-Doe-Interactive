@@ -30,6 +30,7 @@ namespace Infrastructure.Models
 
         public virtual Usuario Usuario { get; set; }
 
+        [Display(Name = "Deudas")]
         public virtual ICollection<Deuda> Deuda { get; set; }
         public Nullable<bool> Borrado { get; set; }
     }

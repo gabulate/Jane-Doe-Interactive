@@ -15,15 +15,13 @@ namespace Web.Controllers
         // GET: Deuda
         public ActionResult Index()
         {
-            IEnumerable<Deuda> lista = null;
+            IEnumerable<Residencia> lista = null;
             try
             {
-                IServiceDeuda _ServiceDeuda = new ServiceDeuda();
-                lista = _ServiceDeuda.GetDeuda();
-                ViewBag.title = "Lista Deudas";
-                //Lista Propietarios
                 IServiceResidencia _ServiceResidencia = new ServiceResidencia();
-                ViewBag.listaResidencia = _ServiceResidencia.GetResidencia();
+                lista = _ServiceResidencia.GetResidencia();
+                ViewBag.title = "Lista Residencias";
+                
                 return View(lista);
             }
             catch (Exception ex)
@@ -40,33 +38,35 @@ namespace Web.Controllers
         // GET: Deuda/Details/5
         public ActionResult Details(int? id)
         {
-            ServiceDeuda _ServiceDeuda = new ServiceDeuda();
-            Deuda deuda = null;
+            ServiceResidencia _ServiceResidencia = new ServiceResidencia();
+            Residencia residencia = null;
             try
             {
+                //Si va null
                 if (id == null)
                 {
                     return RedirectToAction("Index");
                 }
-                //LÍNEA 48 DA PROBLEMAS!!!!!!!!!! ERROR 404
-                deuda=_ServiceDeuda.GetDeudaById(Convert.ToInt32(id)); 
-                if(deuda==null)
+
+                residencia = _ServiceResidencia.GetResidenciaById(Convert.ToInt32(id));
+                if (residencia == null)
                 {
-                    TempData["Message"] = "No existe el deuda solicitado";
+                    TempData["Message"] = "No existe la residencia solicitado";
                     TempData["Redirect"] = "Deuda";
                     TempData["Redirect-Action"] = "Index";
                     // Redireccion a la captura del Error
                     return RedirectToAction("Default", "Error");
                 }
-                return View(deuda);
+                return View(residencia);
+
             }
             catch (Exception ex)
             {
                 // Salvar el error en un archivo 
                 Log.Error(ex, MethodBase.GetCurrentMethod());
                 TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                TempData["Redirect"] = "Deuda";
-                TempData["Redirect-Action"] = "Index";
+                TempData["Redirect"] = "Libro";
+                TempData["Redirect-Action"] = "IndexAdmin";
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
             }
