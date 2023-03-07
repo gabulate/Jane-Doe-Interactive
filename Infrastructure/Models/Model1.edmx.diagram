@@ -9,26 +9,26 @@
         <EntityTypeShape EntityType="CondominiosDBModel.CondicionResidencia" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="CondominiosDBModel.EstadoIncidente" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
         <EntityTypeShape EntityType="CondominiosDBModel.Incidente" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CondominiosDBModel.Informacion" Width="1.5" PointX="10" PointY="9.125" IsExpanded="true" />
         <EntityTypeShape EntityType="CondominiosDBModel.PlanCobro" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
         <EntityTypeShape EntityType="CondominiosDBModel.Reservacion" Width="1.5" PointX="8.25" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CondominiosDBModel.Residencia" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CondominiosDBModel.RubroCobro" Width="1.5" PointX="7.5" PointY="16.25" IsExpanded="true" />
         <EntityTypeShape EntityType="CondominiosDBModel.TipoInformacion" Width="1.5" PointX="7.75" PointY="9.5" IsExpanded="true" />
         <EntityTypeShape EntityType="CondominiosDBModel.TipoUsuario" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="CondominiosDBModel.Usuario" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
         <AssociationConnector Association="CondominiosDBModel.FK_Reservacion_AreaComun" ManuallyRouted="false" />
-        <AssociationConnector Association="CondominiosDBModel.FK_Residencia_CondicionResidencia" ManuallyRouted="false" />
         <AssociationConnector Association="CondominiosDBModel.FK_Incidente_EstadoIncidente" ManuallyRouted="false" />
         <AssociationConnector Association="CondominiosDBModel.FK_Incidente_Usuario" ManuallyRouted="false" />
-        <AssociationConnector Association="CondominiosDBModel.FK_Informacion_TipoInformacion" ManuallyRouted="false" />
         <AssociationConnector Association="CondominiosDBModel.FK_Reservacion_Usuario" ManuallyRouted="false" />
-        <AssociationConnector Association="CondominiosDBModel.FK_Residencia_Usuario" ManuallyRouted="false" />
         <AssociationConnector Association="CondominiosDBModel.FK_Usuario_TipoUsuario" ManuallyRouted="false" />
         <AssociationConnector Association="CondominiosDBModel.PlanCobro_RubroCobro" ManuallyRouted="false" />
         <EntityTypeShape EntityType="CondominiosDBModel.Deuda" Width="1.5" PointX="10.5" PointY="4.625" />
         <AssociationConnector Association="CondominiosDBModel.FK_Deuda_PlanCobro" />
+        <EntityTypeShape EntityType="CondominiosDBModel.Informacion" Width="1.5" PointX="10" PointY="9.25" />
+        <AssociationConnector Association="CondominiosDBModel.FK_Informacion_TipoInformacion" />
+        <EntityTypeShape EntityType="CondominiosDBModel.Residencia" Width="1.5" PointX="5.25" PointY="1.125" />
+        <AssociationConnector Association="CondominiosDBModel.FK_Residencia_CondicionResidencia" />
         <AssociationConnector Association="CondominiosDBModel.FK_Deuda_Residencia" />
+        <AssociationConnector Association="CondominiosDBModel.FK_Residencia_Usuario" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

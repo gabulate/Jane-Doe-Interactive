@@ -63,5 +63,23 @@ namespace Infrastructure.Repository
             }
         }
 
+
+        public RubroCobro Save(RubroCobro rubro)
+        {
+            int retorno = 0;
+            RubroCobro oRubro= null;
+            using(MyContext ctx= new MyContext())
+            {
+                ctx.Configuration.LazyLoadingEnabled=false;
+                oRubro = GetRubroCobroByID((int)rubro.Id);
+                ctx.RubroCobro.Add(rubro);
+                retorno = ctx.SaveChanges();
+            }
+            if(retorno >= 0)
+            {
+                oRubro = GetRubroCobroByID((int)rubro.Id);
+            }
+            return oRubro;
+        }
     }
 }

@@ -11,5 +11,7 @@ namespace ApplicationCore.Services
     {
         IEnumerable<RubroCobro> GetRubroCobro();
         RubroCobro GetRubroCobroByID(int id);
+
+        RubroCobro Save(RubroCobro cobro);
     }
 }
