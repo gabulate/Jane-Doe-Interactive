@@ -70,7 +70,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="MontoTotal" Type="money" Nullable="false" />
+          <Property Name="MontoTotal" Type="money" />
           <Property Name="Borrado" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="PlanCobro_RubroCobro">
@@ -404,7 +404,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="MontoTotal" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="MontoTotal" Type="Decimal" Precision="19" Scale="4" DefaultValue="0.00" />
           <Property Name="Borrado" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="RubroCobro" Relationship="Self.PlanCobro_RubroCobro" FromRole="PlanCobro" ToRole="RubroCobro" />
           <NavigationProperty Name="Deuda" Relationship="CondominiosDBModel.FK_Deuda_PlanCobro" FromRole="PlanCobro" ToRole="Deuda" />

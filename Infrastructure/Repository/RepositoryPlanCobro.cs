@@ -90,32 +90,51 @@ namespace Infrastructure.Repository
 
                 if(oPlanCobro == null )
                 {
-                    if(selectedRubrosCobro!= null)
+                    //Logica para agregar los rubros a los planes
+                    if (selectedRubrosCobro!= null)
                     {
                         planCobro.RubroCobro = new List<RubroCobro>();
                         foreach (var rubro in selectedRubrosCobro)
                         {
                             var rubroToAdd = _RepositoryRubroCobro.GetRubroCobroByID(int.Parse(rubro));
                             ctx.RubroCobro.Attach(rubroToAdd);
-                            ctx.RubroCobro.Add(rubroToAdd);
+                            planCobro.RubroCobro.Add(rubroToAdd);
+
                         }
+                        foreach (var item in selectedRubrosCobro)
+                        {
+                            var rubroToAdd = _RepositoryRubroCobro.GetRubroCobroByID(int.Parse(item));
+                            planCobro.MontoTotal += rubroToAdd.Costo;
+                        }
+                        
+
                     }
+                    //Insertar Plan
                     ctx.PlanCobro.Add(planCobro);
                     retorno = ctx.SaveChanges();
                 }
                 else
                 {
+                    //Actualizar PlanCobro
                     ctx.PlanCobro.Add(planCobro);
                     ctx.Entry(planCobro).State= EntityState.Modified;
                     retorno= ctx.SaveChanges();
 
+                    //Logica para actualizar RubrosCobro
                     var selectedRubrosCobroID = new HashSet<string>(selectedRubrosCobro);
                     if(selectedRubrosCobro != null)
                     {
                         ctx.Entry(planCobro).Collection(p => p.RubroCobro).Load();
-                        var newRubroForPlan = ctx.RubroCobro.
-                            Where(x => selectedRubrosCobroID.Contains(x.Id.ToString())).ToList();
+
+                        var newRubroForPlan = ctx.RubroCobro.Where(x => selectedRubrosCobroID.Contains(x.Id.ToString())).ToList();
+
                         planCobro.RubroCobro = newRubroForPlan;
+
+                        foreach (var item in selectedRubrosCobro)
+                        {
+                            var rubroToAdd = _RepositoryRubroCobro.GetRubroCobroByID(int.Parse(item));
+                            planCobro.MontoTotal += rubroToAdd.Costo;
+                        }
 
                         ctx.Entry(planCobro).State = EntityState.Modified;
                         retorno= ctx.SaveChanges();

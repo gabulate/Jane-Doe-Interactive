@@ -2,6 +2,7 @@
 using Infrastructure.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Web;
@@ -21,7 +22,7 @@ namespace Web.Controllers
                 IServicePlanCobro _ServicioPlanCobro = new ServicePlanCobro();
                 lista = _ServicioPlanCobro.GetPlanCobro();
                 ViewBag.title = "Lista PlanCobro";
-                //Lista RubrosCobro????
+                //Lista RubrosCobro
                 IServiceRubroCobro _ServiceRubroCobro = new ServiceRubroCobro();
                 ViewBag.listaRubroCobro = _ServiceRubroCobro.GetRubroCobro();
                 return View(lista);
@@ -73,46 +74,115 @@ namespace Web.Controllers
         // GET: PlanCobro/Create
         public ActionResult Create()
         {
+            ViewBag.idRubro = listRubros();
             return View();
         }
 
-        // POST: PlanCobro/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        private MultiSelectList listRubros(ICollection<RubroCobro> rubros = null)
         {
-            try
-            {
-                // TODO: Add insert logic here
+            IServiceRubroCobro _ServiceRubroCobro = new ServiceRubroCobro();
+            IEnumerable<RubroCobro> lista = _ServiceRubroCobro.GetRubroCobro();
 
-                return RedirectToAction("Index");
-            }
-            catch
+            int[] listaRubrosSelect = null;
+            if(rubros != null)
             {
-                return View();
+                listaRubrosSelect = rubros.Select(r=>r.Id).ToArray();
             }
+            return new MultiSelectList(lista, "Id", "Descripcion", listaRubrosSelect);
         }
+
 
         // GET: PlanCobro/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            return View();
+            ServicePlanCobro _ServicePlanCobro = new ServicePlanCobro();
+            PlanCobro plan = null;
+
+            try
+            {
+                if (id == null)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                plan = _ServicePlanCobro.GetPlanCobroByID(Convert.ToInt32(id));
+                
+                if(plan == null)
+                {
+                    TempData["Message"] = "No existe el plan de cobro solicitado";
+                    TempData["Redirect"] = "PlanCobro";
+                    TempData["Redirect-Action"] = "Index";
+                    // Redireccion a la captura del Error
+                    return RedirectToAction("Default", "Error");
+                }
+                //Listado
+                ViewBag.IdRubro = listRubros(plan.RubroCobro);
+                return View(plan);
+            }
+            catch(Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "PlanCobro";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
         }
 
         // POST: PlanCobro/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Save(PlanCobro plan, string[] selectedRubrosCobro)
         {
+            
+            //Gestión de archivos
+            MemoryStream target = new MemoryStream();
+            IServicePlanCobro _ServicePlanCobro = new ServicePlanCobro();
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                 if (ModelState.IsValid)
+                 {
+                        PlanCobro oPlanCobroI = _ServicePlanCobro.Save(plan, selectedRubrosCobro);
+                 }
+                 else
+                 {
+                     // Valida Errores si Javascript está deshabilitado
+                     Utils.Util.ValidateErrors(this);
+                     ViewBag.idRubro = listRubros(plan.RubroCobro);
+                    //Cargar la vista crear o actualizar
+                    //Lógica para cargar vista correspondiente
+                    if(plan.Id > 0)
+                    {
+                        return (ActionResult)View("Edit", plan);
+                    }
+                    else
+                    {
+                        return View("Create", plan); 
+                    }
+                    
+                }
+                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "PlanCobro";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
             }
         }
+
+
+
+
+
+
+
+
 
         // GET: PlanCobro/Delete/5
         public ActionResult Delete(int id)

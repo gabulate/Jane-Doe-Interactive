@@ -63,7 +63,12 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+
+<div class="form-group">
+    <div class="btn-group" role="group">
+        @Html.ActionLink("Editar", "Edit",  new { id = Model.Id }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Regresar al listado", "Index", null, new { @class = "btn btn-secondary" })
+    </div>
+</div>
+

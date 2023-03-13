@@ -2,6 +2,7 @@
 using Infrastructure.Utils;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
@@ -45,7 +46,8 @@ namespace Infrastructure.Repository
                 using(MyContext ctx= new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled=false;
-                    rubro = ctx.RubroCobro.Find();
+                    //rubro = ctx.RubroCobro.Where(p=>p.Id ==id).FirstOrDefault<RubroCobro>();
+                    rubro = ctx.RubroCobro.Find(id);
                 }
                 return rubro;
             }
@@ -72,9 +74,23 @@ namespace Infrastructure.Repository
             {
                 ctx.Configuration.LazyLoadingEnabled=false;
                 oRubro = GetRubroCobroByID((int)rubro.Id);
-                ctx.RubroCobro.Add(rubro);
-                retorno = ctx.SaveChanges();
+                //
+                //
+
+                if (oRubro == null)
+                {
+                    ctx.RubroCobro.Add(rubro);
+                    retorno = ctx.SaveChanges();
+                }
+                else
+                {
+                    ctx.RubroCobro.Add(rubro);
+                    ctx.Entry(rubro).State = EntityState.Modified;
+                    retorno = ctx.SaveChanges();
+                }
+
             }
+            
             if(retorno >= 0)
             {
                 oRubro = GetRubroCobroByID((int)rubro.Id);

@@ -30,7 +30,7 @@ namespace Infrastructure.Models
 
         public virtual Usuario Usuario { get; set; }
 
-        [Display(Name = "Deudas")]
+        [Display(Name = "Historial")]
         public virtual ICollection<Deuda> Deuda { get; set; }
         public Nullable<bool> Borrado { get; set; }
     }
@@ -60,10 +60,11 @@ namespace Infrastructure.Models
 
         [Display(Name = "Descripción")]
         public string Descripcion { get; set; }
+       
 
         [Display(Name = "Monto Total")]
         [DisplayFormat(DataFormatString = "{0:C}")]  //para agregar signo de colones. el 0 reemplaza con el valor que representa. El C representa el signo de de colones
-        [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})?$")]
+        //[RegularExpression(@"^[0-9]+(\.[0-9]{1,2})?$")] EL HIJO DEL DEMONIO!
 
         public decimal MontoTotal { get; set; }
         public bool Borrado { get; set; }
@@ -87,10 +88,12 @@ namespace Infrastructure.Models
         public int Id { get; set; }
 
         [Display(Name = "Descripción")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
         public string Descripcion { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:C}")]
-        [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})?$")]
+        //[RegularExpression(@"^[0-9]+(\.[0-9]{1,2})?$", ErrorMessage = "Solo se aceptan números con dos decimales y con punto.")]
+        //[Required(ErrorMessage = "{0} es un dato requerido")]
         public decimal Costo { get; set; }
     }
 

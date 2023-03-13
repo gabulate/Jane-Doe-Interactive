@@ -17,7 +17,6 @@ using System;
     using System.ComponentModel.DataAnnotations;
 
     [MetadataType(typeof(CondicionResidenciaMetadata))]
-
     public partial class CondicionResidencia
 {
 

@@ -17,12 +17,15 @@ using System;
     using System.ComponentModel.DataAnnotations;
 
     [MetadataType(typeof(PlanCobroMetadata))]
+
     public partial class PlanCobro
 {
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
     public PlanCobro()
     {
+
+        this.MontoTotal = 0.00m;
 
         this.RubroCobro = new HashSet<RubroCobro>();
 
@@ -35,7 +38,7 @@ using System;
 
     public string Descripcion { get; set; }
 
-    public decimal MontoTotal { get; set; }
+    public Nullable<decimal> MontoTotal { get; set; }
 
     public bool Borrado { get; set; }
 
