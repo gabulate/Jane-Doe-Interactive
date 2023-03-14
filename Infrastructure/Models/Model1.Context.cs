@@ -38,5 +38,6 @@ namespace Infrastructure.Models
         public virtual DbSet<TipoInformacion> TipoInformacion { get; set; }
         public virtual DbSet<TipoUsuario> TipoUsuario { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }

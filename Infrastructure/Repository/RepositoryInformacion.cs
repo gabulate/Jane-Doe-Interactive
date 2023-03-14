@@ -73,7 +73,7 @@ namespace Infrastructure.Repository
         }
 
         public Informacion Save(Informacion informacion)
-        {
+            {
             int retorno = 0;
             Informacion oInformacion = null;
             using (MyContext ctx = new MyContext())
