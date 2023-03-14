@@ -8,7 +8,7 @@
 <h2>Novedades</h2>
 
 <p>
-    <a href="@Url.Action("Create", "PlanCobro")" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Crear </a>
+    <a href="@Url.Action("Create", "Home")" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Crear </a>
     @*@Html.ActionLink("Crear", "Create")*@
 </p>
 
@@ -28,10 +28,14 @@
                     <div class="card">
 
                         <div class="card-body">
-                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.TipoInformacion1.Descripcion)</h5>
+                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.TipoInformacion.Descripcion)</h5>
                             <h6 class="card-subtitle mb-2 text-muted">  @Html.DisplayFor(modelItem => item.Texto)</h6>
                             <a href="@Url.Action("Edit", "Home", new {id=item.Id})"
                                class="btn btn-primary">Editar</a>
+                            @if (item.Doc1 != null)
+                            {
+                                <a href="@Url.Action("DescargarArchivo", "Home", new {id=item.Id})">Descargar archivo</a>
+                            }
                         </div>
                     </div>
                 </div>      }

@@ -120,4 +120,28 @@ namespace Infrastructure.Models
         [Display(Name = "Número de factura")]
         public int Id { get; set; }
     }
+
+    internal partial class TipoInformacionMetadata
+    {
+        public int Id { get; set; }
+
+        [Display(Name = "Tipo de información")]
+        public string Descripcion { get; set; }
+        public bool Borrado { get; set; }
+    }
+
+    internal partial class InformacionMetadata
+    {
+        public int Id { get; set; }
+
+        public string Texto { get; set; }
+
+        [Display(Name = "Documento")]
+        public byte[] Doc1 { get; set; }
+
+        [Display(Name = "Tipo de información")]
+        public int TipoInformacion { get; set; }
+
+        public bool Borrado { get; set; }
+    }
 }

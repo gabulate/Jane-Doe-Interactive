@@ -176,14 +176,6 @@ namespace Web.Controllers
             }
         }
 
-
-
-
-
-
-
-
-
         // GET: PlanCobro/Delete/5
         public ActionResult Delete(int id)
         {

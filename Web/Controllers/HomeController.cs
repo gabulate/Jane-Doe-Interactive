@@ -3,6 +3,7 @@ using Infrastructure.Models;
 using Infrastructure.Utils;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Web;
@@ -56,18 +57,11 @@ namespace Web.Controllers
             }
         }
 
-        //CREAR SERVICE DE TIPOINFORMACION
-        private MultiSelectList listTipos(ICollection<TipoInformacion> tipos = null)
+        private SelectList listTipos(int idTipo = 0)
         {
-            IServiceRubroCobro _ServiceRubroCobro = new ServiceRubroCobro();
-            IEnumerable<RubroCobro> lista = _ServiceRubroCobro.GetRubroCobro();
-
-            int[] listaRubrosSelect = null;
-            if (tipos != null)
-            {
-                listaRubrosSelect = tipos.Select(r => r.Id).ToArray();
-            }
-            return new MultiSelectList(lista, "Id", "Descripcion", listaRubrosSelect);
+            IServiceTipoInformación _Service = new ServiceTipoInformacion();
+            IEnumerable<TipoInformacion> lista = _Service.GetTipoInformacion();
+            return new SelectList(lista, "Id", "Descripcion", idTipo);
         }
 
         public ActionResult Edit(int? id)
@@ -89,8 +83,7 @@ namespace Web.Controllers
                     // Redireccion a la captura del Error
                     return RedirectToAction("Default", "Error");
                 }
-                //ViewBag.IdTipoInfo = listTipos(plan.RubroCobro);
-
+                ViewBag.IdTipoInformacion = listTipos(info.IdTipoInformacion);
                 return View(info);
             }
             catch (Exception ex)
@@ -100,6 +93,62 @@ namespace Web.Controllers
                 TempData["Message"] = "Error al procesar los datos! " + ex.Message;
                 TempData["Redirect"] = "Home";
                 TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
+
+        public ActionResult Create()
+        {
+            ViewBag.IdTipoInformacion = listTipos();
+            return View();
+        }
+
+        // POST: RubroCobro/Create CREAR O ACTUALIZAR
+        [HttpPost]
+        public ActionResult Save(Informacion info, HttpPostedFileBase Documento)
+        {
+            MemoryStream target = new MemoryStream();
+            IServiceInformacion _ServiceInformacion = new ServiceInformacion();
+
+            try
+            {
+                //Insertar la imagen
+                if (info.Doc1 == null)
+                {
+                    if (Documento != null)
+                    {
+                        Documento.InputStream.CopyTo(target);
+                        info.Doc1 = target.ToArray();
+                        ModelState.Remove("Documento");
+                    }
+                }
+                if (ModelState.IsValid)
+                {
+                    Informacion oInformacion = _ServiceInformacion.Save(info);
+                }
+                else
+                {
+                    // Valida Errores si Javascript está deshabilitado
+                    Utils.Util.ValidateErrors(this);
+                    //Cargar la vista crear o actualizar
+                    //Lógica para cargar vista correspondiente
+                    if (info.Id > 0)
+                    {
+                        return (ActionResult)View("Edit", info);
+                    }
+                    else
+                    {
+                        return View("Create", info);
+                    }
+                }
+                return RedirectToAction("IndexMante");
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "";
+                TempData["Redirect-Action"] = "IndexAdmin";
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
             }
@@ -122,9 +171,10 @@ namespace Web.Controllers
         public  ActionResult DescargarArchivo(int? id = 0)
         {
             IServiceInformacion _Service = new ServiceInformacion();
-            Informacion oInformacion = _Service.GetInformacionById(2);
+            Informacion oInformacion = _Service.GetInformacionById((int)id);
+            string name = oInformacion.TipoInformacion.Descripcion;
 
-            return File(oInformacion.Doc1, "application/pdf", "hola.pdf");
+            return File(oInformacion.Doc1, "application/pdf", name + ".pdf");
         }
     }
 }
