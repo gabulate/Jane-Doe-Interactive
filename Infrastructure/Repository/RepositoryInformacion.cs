@@ -26,7 +26,7 @@ namespace Infrastructure.Repository
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
                     //Obtener todos los Usuarios incluyendo el autor
-                    lista = ctx.Informacion.Include("TipoInformacion").ToList();
+                    lista = ctx.Informacion.Include("TipoInformacion1").ToList();
 
                 }
                 return lista;
@@ -54,7 +54,7 @@ namespace Infrastructure.Repository
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    info = ctx.Informacion.Where(u => u.Id == id).Include("TipoInformacion").FirstOrDefault();
+                    info = ctx.Informacion.Where(u => u.Id == id).Include("TipoInformacion1").FirstOrDefault();
                 }
                 return info;
             }

@@ -11,5 +11,6 @@ namespace Infrastructure.Repository
     {
         IEnumerable<RubroCobro> GetRubroCobro();
         RubroCobro GetRubroCobroByID(int id);
+        RubroCobro Save(RubroCobro rubro);
     }
 }

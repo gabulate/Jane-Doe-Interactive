@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Infrastructure.Models.Informacion>
+
+@{
+    ViewBag.Title = "IndexMante";
+}
+
+
+<h2>Novedades</h2>
+
+<p>
+    <a href="@Url.Action("Create", "PlanCobro")" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Crear </a>
+    @*@Html.ActionLink("Crear", "Create")*@
+</p>
+
+<div class="row">
+    <div class="col-lg-3">
+        <div class="list-group">
+
+
+        </div>
+    </div>
+
+    <div class="col-lg-9">
+        <div id="resultado" class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-sm-3">
+                    <div class="card">
+
+                        <div class="card-body">
+                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.TipoInformacion1.Descripcion)</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">  @Html.DisplayFor(modelItem => item.Texto)</h6>
+                            <a href="@Url.Action("Edit", "Home", new {id=item.Id})"
+                               class="btn btn-primary">Editar</a>
+                        </div>
+                    </div>
+                </div>      }
+        </div>
+    </div>
+</div>
+

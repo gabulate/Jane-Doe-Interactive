@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="100" />
           <Property Name="HoraAbierto" Type="time" Precision="7" Nullable="false" />
           <Property Name="HoraCierre" Type="time" Precision="7" Nullable="false" />
@@ -19,7 +19,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Borrado" Type="bit" Nullable="false" />
         </EntityType>
@@ -33,13 +33,13 @@
           <Property Name="PendientePago" Type="bit" Nullable="false" />
           <Property Name="MontoPagado" Type="money" Nullable="false" />
           <Property Name="Borrado" Type="bit" Nullable="false" />
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="EstadoIncidente">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Borrado" Type="bit" Nullable="false" />
         </EntityType>
@@ -47,7 +47,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdUsuario" Type="int" Nullable="false" />
           <Property Name="Titulo" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="200" Nullable="false" />
@@ -61,8 +61,6 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Texto" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Doc1" Type="varbinary(max)" />
-          <Property Name="Doc2" Type="varbinary(max)" />
-          <Property Name="Doc3" Type="varbinary(max)" />
           <Property Name="TipoInformacion" Type="int" Nullable="false" />
           <Property Name="Borrado" Type="bit" Nullable="false" />
         </EntityType>
@@ -70,9 +68,9 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="MontoTotal" Type="money" Nullable="false" />
+          <Property Name="MontoTotal" Type="money" />
           <Property Name="Borrado" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="PlanCobro_RubroCobro">
@@ -89,7 +87,7 @@
             <PropertyRef Name="IdAreaComun" />
             <PropertyRef Name="IdUsuario" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdAreaComun" Type="int" Nullable="false" />
           <Property Name="IdUsuario" Type="int" Nullable="false" />
           <Property Name="HoraInicio" Type="time" Precision="7" Nullable="false" />
@@ -100,7 +98,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Propietario" Type="int" Nullable="false" />
           <Property Name="Habitantes" Type="tinyint" Nullable="false" />
           <Property Name="AnioConstrucion" Type="date" />
@@ -112,7 +110,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Costo" Type="money" Nullable="false" />
           <Property Name="Borrado" Type="bit" Nullable="false" />
@@ -121,7 +119,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Borrado" Type="bit" Nullable="false" />
         </EntityType>
@@ -129,7 +127,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Borrado" Type="bit" Nullable="false" />
         </EntityType>
@@ -137,7 +135,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdTipoUsuario" Type="int" Nullable="false" />
           <Property Name="Nombre" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Apellido" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -362,7 +360,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="HoraAbierto" Type="Time" Nullable="false" Precision="7" />
           <Property Name="HoraCierre" Type="Time" Nullable="false" Precision="7" />
@@ -373,16 +371,16 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descripcion" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Borrado" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Residencia" Relationship="Self.FK_Residencia_CondicionResidencia" FromRole="CondicionResidencia" ToRole="Residencia" />
+          <NavigationProperty Name="Residencia" Relationship="CondominiosDBModel.FK_Residencia_CondicionResidencia" FromRole="CondicionResidencia" ToRole="Residencia" />
         </EntityType>
         <EntityType Name="EstadoIncidente">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descripcion" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Borrado" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Incidente" Relationship="Self.FK_Incidente_EstadoIncidente" FromRole="EstadoIncidente" ToRole="Incidente" />
@@ -391,7 +389,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdUsuario" Type="Int32" Nullable="false" />
           <Property Name="Titulo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
@@ -400,26 +398,13 @@
           <NavigationProperty Name="EstadoIncidente" Relationship="Self.FK_Incidente_EstadoIncidente" FromRole="Incidente" ToRole="EstadoIncidente" />
           <NavigationProperty Name="Usuario" Relationship="Self.FK_Incidente_Usuario" FromRole="Incidente" ToRole="Usuario" />
         </EntityType>
-        <EntityType Name="Informacion">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Texto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Doc1" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="Doc2" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="Doc3" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="TipoInformacion" Type="Int32" Nullable="false" />
-          <Property Name="Borrado" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="TipoInformacion1" Relationship="Self.FK_Informacion_TipoInformacion" FromRole="Informacion" ToRole="TipoInformacion" />
-        </EntityType>
         <EntityType Name="PlanCobro">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="MontoTotal" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="MontoTotal" Type="Decimal" Precision="19" Scale="4" DefaultValue="0.00" />
           <Property Name="Borrado" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="RubroCobro" Relationship="Self.PlanCobro_RubroCobro" FromRole="PlanCobro" ToRole="RubroCobro" />
           <NavigationProperty Name="Deuda" Relationship="CondominiosDBModel.FK_Deuda_PlanCobro" FromRole="PlanCobro" ToRole="Deuda" />
@@ -430,35 +415,20 @@
             <PropertyRef Name="IdAreaComun" />
             <PropertyRef Name="IdUsuario" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="IdAreaComun" Type="Int32" Nullable="false" />
-          <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdAreaComun" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="HoraInicio" Type="Time" Nullable="false" Precision="7" />
           <Property Name="HoraFinal" Type="Time" Nullable="false" Precision="7" />
           <Property Name="Borrado" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="AreaComun" Relationship="Self.FK_Reservacion_AreaComun" FromRole="Reservacion" ToRole="AreaComun" />
           <NavigationProperty Name="Usuario" Relationship="Self.FK_Reservacion_Usuario" FromRole="Reservacion" ToRole="Usuario" />
         </EntityType>
-        <EntityType Name="Residencia">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Propietario" Type="Int32" Nullable="false" />
-          <Property Name="Habitantes" Type="Byte" Nullable="false" />
-          <Property Name="AnioConstrucion" Type="DateTime" Precision="0" />
-          <Property Name="Condicion" Type="Int32" Nullable="false" />
-          <Property Name="Vehiculos" Type="Byte" Nullable="false" />
-          <Property Name="Borrado" Type="Boolean" />
-          <NavigationProperty Name="CondicionResidencia" Relationship="Self.FK_Residencia_CondicionResidencia" FromRole="Residencia" ToRole="CondicionResidencia" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK_Residencia_Usuario" FromRole="Residencia" ToRole="Usuario" />
-          <NavigationProperty Name="Deuda" Relationship="CondominiosDBModel.FK_Deuda_Residencia" FromRole="Residencia" ToRole="Deuda" />
-        </EntityType>
         <EntityType Name="RubroCobro">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Costo" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="Borrado" Type="Boolean" Nullable="false" />
@@ -468,16 +438,16 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descripcion" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Borrado" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Informacion" Relationship="Self.FK_Informacion_TipoInformacion" FromRole="TipoInformacion" ToRole="Informacion" />
+          <NavigationProperty Name="Informacion" Relationship="CondominiosDBModel.FK_Informacion_TipoInformacion" FromRole="TipoInformacion" ToRole="Informacion" />
         </EntityType>
         <EntityType Name="TipoUsuario">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descripcion" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Borrado" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Usuario" Relationship="Self.FK_Usuario_TipoUsuario" FromRole="TipoUsuario" ToRole="Usuario" />
@@ -486,7 +456,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdTipoUsuario" Type="Int32" Nullable="false" />
           <Property Name="Nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
@@ -496,8 +466,8 @@
           <Property Name="Borrado" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Incidente" Relationship="Self.FK_Incidente_Usuario" FromRole="Usuario" ToRole="Incidente" />
           <NavigationProperty Name="Reservacion" Relationship="Self.FK_Reservacion_Usuario" FromRole="Usuario" ToRole="Reservacion" />
-          <NavigationProperty Name="Residencia" Relationship="Self.FK_Residencia_Usuario" FromRole="Usuario" ToRole="Residencia" />
           <NavigationProperty Name="TipoUsuario" Relationship="Self.FK_Usuario_TipoUsuario" FromRole="Usuario" ToRole="TipoUsuario" />
+          <NavigationProperty Name="Residencia" Relationship="CondominiosDBModel.FK_Residencia_Usuario" FromRole="Usuario" ToRole="Residencia" />
         </EntityType>
         <Association Name="FK_Reservacion_AreaComun">
           <End Role="AreaComun" Type="Self.AreaComun" Multiplicity="1" />
@@ -508,18 +478,6 @@
             </Principal>
             <Dependent Role="Reservacion">
               <PropertyRef Name="IdAreaComun" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Residencia_CondicionResidencia">
-          <End Role="CondicionResidencia" Type="Self.CondicionResidencia" Multiplicity="1" />
-          <End Role="Residencia" Type="Self.Residencia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CondicionResidencia">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Residencia">
-              <PropertyRef Name="Condicion" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -547,18 +505,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Informacion_TipoInformacion">
-          <End Role="TipoInformacion" Type="Self.TipoInformacion" Multiplicity="1" />
-          <End Role="Informacion" Type="Self.Informacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoInformacion">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Informacion">
-              <PropertyRef Name="TipoInformacion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Reservacion_Usuario">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
           <End Role="Reservacion" Type="Self.Reservacion" Multiplicity="*" />
@@ -568,18 +514,6 @@
             </Principal>
             <Dependent Role="Reservacion">
               <PropertyRef Name="IdUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Residencia_Usuario">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="Residencia" Type="Self.Residencia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Residencia">
-              <PropertyRef Name="Propietario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -604,10 +538,8 @@
           <EntitySet Name="CondicionResidencia" EntityType="Self.CondicionResidencia" />
           <EntitySet Name="EstadoIncidente" EntityType="Self.EstadoIncidente" />
           <EntitySet Name="Incidente" EntityType="Self.Incidente" />
-          <EntitySet Name="Informacion" EntityType="Self.Informacion" />
           <EntitySet Name="PlanCobro" EntityType="Self.PlanCobro" />
           <EntitySet Name="Reservacion" EntityType="Self.Reservacion" />
-          <EntitySet Name="Residencia" EntityType="Self.Residencia" />
           <EntitySet Name="RubroCobro" EntityType="Self.RubroCobro" />
           <EntitySet Name="TipoInformacion" EntityType="Self.TipoInformacion" />
           <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" />
@@ -615,10 +547,6 @@
           <AssociationSet Name="FK_Reservacion_AreaComun" Association="Self.FK_Reservacion_AreaComun">
             <End Role="AreaComun" EntitySet="AreaComun" />
             <End Role="Reservacion" EntitySet="Reservacion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Residencia_CondicionResidencia" Association="Self.FK_Residencia_CondicionResidencia">
-            <End Role="CondicionResidencia" EntitySet="CondicionResidencia" />
-            <End Role="Residencia" EntitySet="Residencia" />
           </AssociationSet>
           <AssociationSet Name="FK_Incidente_EstadoIncidente" Association="Self.FK_Incidente_EstadoIncidente">
             <End Role="EstadoIncidente" EntitySet="EstadoIncidente" />
@@ -628,17 +556,9 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Incidente" EntitySet="Incidente" />
           </AssociationSet>
-          <AssociationSet Name="FK_Informacion_TipoInformacion" Association="Self.FK_Informacion_TipoInformacion">
-            <End Role="TipoInformacion" EntitySet="TipoInformacion" />
-            <End Role="Informacion" EntitySet="Informacion" />
-          </AssociationSet>
           <AssociationSet Name="FK_Reservacion_Usuario" Association="Self.FK_Reservacion_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Reservacion" EntitySet="Reservacion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Residencia_Usuario" Association="Self.FK_Residencia_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Residencia" EntitySet="Residencia" />
           </AssociationSet>
           <AssociationSet Name="FK_Usuario_TipoUsuario" Association="Self.FK_Usuario_TipoUsuario">
             <End Role="TipoUsuario" EntitySet="TipoUsuario" />
@@ -653,9 +573,23 @@
             <End Role="PlanCobro" EntitySet="PlanCobro" />
             <End Role="Deuda" EntitySet="Deuda" />
           </AssociationSet>
+          <EntitySet Name="Informacion" EntityType="CondominiosDBModel.Informacion" />
+          <AssociationSet Name="FK_Informacion_TipoInformacion" Association="CondominiosDBModel.FK_Informacion_TipoInformacion">
+            <End Role="TipoInformacion" EntitySet="TipoInformacion" />
+            <End Role="Informacion" EntitySet="Informacion" />
+          </AssociationSet>
+          <EntitySet Name="Residencia" EntityType="CondominiosDBModel.Residencia" />
+          <AssociationSet Name="FK_Residencia_CondicionResidencia" Association="CondominiosDBModel.FK_Residencia_CondicionResidencia">
+            <End Role="CondicionResidencia" EntitySet="CondicionResidencia" />
+            <End Role="Residencia" EntitySet="Residencia" />
+          </AssociationSet>
           <AssociationSet Name="FK_Deuda_Residencia" Association="CondominiosDBModel.FK_Deuda_Residencia">
             <End Role="Residencia" EntitySet="Residencia" />
             <End Role="Deuda" EntitySet="Deuda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Residencia_Usuario" Association="CondominiosDBModel.FK_Residencia_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Residencia" EntitySet="Residencia" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Deuda">
@@ -668,7 +602,7 @@
           <Property Name="PendientePago" Type="Boolean" Nullable="false" />
           <Property Name="MontoPagado" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <Property Name="Borrado" Type="Boolean" Nullable="false" />
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="PlanCobro" Relationship="CondominiosDBModel.FK_Deuda_PlanCobro" FromRole="Deuda" ToRole="PlanCobro" />
           <NavigationProperty Name="Residencia" Relationship="CondominiosDBModel.FK_Deuda_Residencia" FromRole="Deuda" ToRole="Residencia" />
         </EntityType>
@@ -684,6 +618,56 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Informacion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Texto" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Doc1" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="TipoInformacion" Type="Int32" Nullable="false" />
+          <Property Name="Borrado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TipoInformacion1" Relationship="CondominiosDBModel.FK_Informacion_TipoInformacion" FromRole="Informacion" ToRole="TipoInformacion" />
+        </EntityType>
+        <Association Name="FK_Informacion_TipoInformacion">
+          <End Type="CondominiosDBModel.TipoInformacion" Role="TipoInformacion" Multiplicity="1" />
+          <End Type="CondominiosDBModel.Informacion" Role="Informacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoInformacion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Informacion">
+              <PropertyRef Name="TipoInformacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Residencia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Propietario" Type="Int32" Nullable="false" />
+          <Property Name="Habitantes" Type="Byte" Nullable="false" />
+          <Property Name="AnioConstrucion" Type="DateTime" Precision="0" />
+          <Property Name="Condicion" Type="Int32" Nullable="false" />
+          <Property Name="Vehiculos" Type="Byte" Nullable="false" />
+          <Property Name="Borrado" Type="Boolean" />
+          <NavigationProperty Name="CondicionResidencia" Relationship="CondominiosDBModel.FK_Residencia_CondicionResidencia" FromRole="Residencia" ToRole="CondicionResidencia" />
+          <NavigationProperty Name="Deuda" Relationship="CondominiosDBModel.FK_Deuda_Residencia" FromRole="Residencia" ToRole="Deuda" />
+          <NavigationProperty Name="Usuario" Relationship="CondominiosDBModel.FK_Residencia_Usuario" FromRole="Residencia" ToRole="Usuario" />
+        </EntityType>
+        <Association Name="FK_Residencia_CondicionResidencia">
+          <End Type="CondominiosDBModel.CondicionResidencia" Role="CondicionResidencia" Multiplicity="1" />
+          <End Type="CondominiosDBModel.Residencia" Role="Residencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CondicionResidencia">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Residencia">
+              <PropertyRef Name="Condicion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Deuda_Residencia">
           <End Type="CondominiosDBModel.Residencia" Role="Residencia" Multiplicity="1" />
           <End Type="CondominiosDBModel.Deuda" Role="Deuda" Multiplicity="*" />
@@ -693,6 +677,18 @@
             </Principal>
             <Dependent Role="Deuda">
               <PropertyRef Name="IdResidencia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Residencia_Usuario">
+          <End Type="CondominiosDBModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="CondominiosDBModel.Residencia" Role="Residencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Residencia">
+              <PropertyRef Name="Propietario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -743,19 +739,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Informacion">
-            <EntityTypeMapping TypeName="CondominiosDBModel.Informacion">
-              <MappingFragment StoreEntitySet="Informacion">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Texto" ColumnName="Texto" />
-                <ScalarProperty Name="Doc1" ColumnName="Doc1" />
-                <ScalarProperty Name="Doc2" ColumnName="Doc2" />
-                <ScalarProperty Name="Doc3" ColumnName="Doc3" />
-                <ScalarProperty Name="TipoInformacion" ColumnName="TipoInformacion" />
-                <ScalarProperty Name="Borrado" ColumnName="Borrado" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="PlanCobro">
             <EntityTypeMapping TypeName="CondominiosDBModel.PlanCobro">
               <MappingFragment StoreEntitySet="PlanCobro">
@@ -774,19 +757,6 @@
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
                 <ScalarProperty Name="HoraInicio" ColumnName="HoraInicio" />
                 <ScalarProperty Name="HoraFinal" ColumnName="HoraFinal" />
-                <ScalarProperty Name="Borrado" ColumnName="Borrado" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Residencia">
-            <EntityTypeMapping TypeName="CondominiosDBModel.Residencia">
-              <MappingFragment StoreEntitySet="Residencia">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Propietario" ColumnName="Propietario" />
-                <ScalarProperty Name="Habitantes" ColumnName="Habitantes" />
-                <ScalarProperty Name="AnioConstrucion" ColumnName="AnioConstrucion" />
-                <ScalarProperty Name="Condicion" ColumnName="Condicion" />
-                <ScalarProperty Name="Vehiculos" ColumnName="Vehiculos" />
                 <ScalarProperty Name="Borrado" ColumnName="Borrado" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -851,6 +821,30 @@
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="IdPlanCobro" ColumnName="IdPlanCobro" />
                 <ScalarProperty Name="IdResidencia" ColumnName="IdResidencia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Informacion">
+            <EntityTypeMapping TypeName="CondominiosDBModel.Informacion">
+              <MappingFragment StoreEntitySet="Informacion">
+                <ScalarProperty Name="Borrado" ColumnName="Borrado" />
+                <ScalarProperty Name="TipoInformacion" ColumnName="TipoInformacion" />
+                <ScalarProperty Name="Doc1" ColumnName="Doc1" />
+                <ScalarProperty Name="Texto" ColumnName="Texto" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Residencia">
+            <EntityTypeMapping TypeName="CondominiosDBModel.Residencia">
+              <MappingFragment StoreEntitySet="Residencia">
+                <ScalarProperty Name="Borrado" ColumnName="Borrado" />
+                <ScalarProperty Name="Vehiculos" ColumnName="Vehiculos" />
+                <ScalarProperty Name="Condicion" ColumnName="Condicion" />
+                <ScalarProperty Name="AnioConstrucion" ColumnName="AnioConstrucion" />
+                <ScalarProperty Name="Habitantes" ColumnName="Habitantes" />
+                <ScalarProperty Name="Propietario" ColumnName="Propietario" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
