@@ -144,4 +144,28 @@ namespace Infrastructure.Models
 
         public bool Borrado { get; set; }
     }
+
+    internal partial class IncidenteMetadata
+    {
+        public int Id { get; set; }
+        public int IdUsuario { get; set; }
+        [Display(Name = "Título")]
+        public string Titulo { get; set; }
+        [Display(Name = "Descripción")]
+        public string Descripcion { get; set; }
+        public int Estado { get; set; }
+        public bool Borrado { get; set; }
+
+        public virtual EstadoIncidente EstadoIncidente { get; set; }
+        public virtual Usuario Usuario { get; set; }
+    }
+
+    internal partial class EstadoIncidenteMetadata
+    {
+        public int Id { get; set; }
+
+        [Display(Name = "Estado")]
+        public string Descripcion { get; set; }
+        public bool Borrado { get; set; }
+    }
 }

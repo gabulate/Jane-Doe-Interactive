@@ -27,12 +27,18 @@
                         <div class="dropdown-divider"></div>
                         @Html.ActionLink("Información", "IndexMante", "Home",
                                                                null, new { @class = "dropdown-item" })
-
+                        <div class="dropdown-divider"></div>
+                        @Html.ActionLink("Incidentes", "IndexMante", "Incidente",
+                                                               null, new { @class = "dropdown-item" })
 
 
                     </div>
                 </li>
                 @* Texto Usuario, Accion, Controlador*@
+            <li>
+                @Html.ActionLink("Incidencias", "Index", "Incidente",
+                null, new { @class = "nav-link" })
+            </li>
                 <li>
                     @Html.ActionLink("Acerca de", "About", "Home",
                     null, new { @class = "nav-link" })

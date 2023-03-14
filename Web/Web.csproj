@@ -145,6 +145,7 @@
     <Compile Include="Controllers\DeudaController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IncidenteController.cs" />
     <Compile Include="Controllers\PlanCobroController.cs" />
     <Compile Include="Controllers\ResidenciaController.cs" />
     <Compile Include="Controllers\RubroCobroController.cs" />
@@ -224,6 +225,10 @@
     <Content Include="Views\Home\IndexMante.cshtml" />
     <Content Include="Views\Home\Edit.cshtml" />
     <Content Include="Views\Home\Create.cshtml" />
+    <Content Include="Views\Incidente\Index.cshtml" />
+    <Content Include="Views\Incidente\IndexMante.cshtml" />
+    <Content Include="Views\Incidente\Create.cshtml" />
+    <Content Include="Views\Incidente\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
