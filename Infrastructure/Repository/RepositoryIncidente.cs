@@ -118,22 +118,17 @@ namespace Infrastructure.Repository
             using (MyContext ctx = new MyContext())
             {
                 ctx.Configuration.LazyLoadingEnabled = false;
-                oIncidente = GetIncidenteById((int)incidente.Id);
+                oIncidente = GetIncidenteById(incidente.Id);
 
                 if (oIncidente == null)
                 {
-                    incidente.IdUsuario = 1;
-                    incidente.Estado = 1;
                     ctx.Incidente.Add(incidente);
                     retorno = ctx.SaveChanges();
                 }
                 else
                 {
-                    oIncidente.Estado = incidente.Estado;
-
-                    oIncidente.EstadoIncidente = new RepositoryEstadoIncidente().GetEstadoById(oIncidente.Estado);
-                    ctx.Incidente.Add(oIncidente);
-                    ctx.Entry(oIncidente).State = EntityState.Modified;
+                    ctx.Incidente.Add(incidente);
+                    ctx.Entry(incidente).State = EntityState.Modified;
                     retorno = ctx.SaveChanges();
                 }
 
@@ -141,7 +136,7 @@ namespace Infrastructure.Repository
 
             if (retorno >= 0)
             {
-                oIncidente = GetIncidenteById((int)incidente.Id);
+                oIncidente = GetIncidenteById(incidente.Id);
             }
             return oIncidente;
         }

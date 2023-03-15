@@ -118,6 +118,7 @@ namespace Web.Controllers
         {
             return View();
         }
+        [HttpPost]
         public ActionResult Save(Incidente incidente)
         {
             IServiceIncidente _Service = new ServiceIncidente();
