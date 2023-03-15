@@ -100,8 +100,17 @@ namespace Web.Controllers
 
         public ActionResult Create()
         {
+            Informacion info = new Informacion()
+            {
+                Id = 0,
+                Borrado = false,
+                Doc1 = null,
+                Texto = ""
+            };
+            
+
             ViewBag.IdTipoInformacion = listTipos();
-            return View();
+            return View(info);
         }
 
         // POST: RubroCobro/Create CREAR O ACTUALIZAR
@@ -123,6 +132,7 @@ namespace Web.Controllers
                         ModelState.Remove("Documento");
                     }
                 }
+
                 if (ModelState.IsValid)
                 {
                     Informacion oInformacion = _ServiceInformacion.Save(info);
@@ -135,6 +145,8 @@ namespace Web.Controllers
                     //Lógica para cargar vista correspondiente
                     if (info.Id > 0)
                     {
+                        ViewBag.IdTipoInformacion = listTipos(info.IdTipoInformacion);
+
                         return (ActionResult)View("Edit", info);
                     }
                     else

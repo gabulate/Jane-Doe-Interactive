@@ -142,9 +142,8 @@ namespace Infrastructure.Models
         [Display(Name = "Documento")]
         public byte[] Doc1 { get; set; }
 
-        [Required(ErrorMessage = "{0} es un dato requerido")]
         [Display(Name = "Tipo de información")]
-        public int TipoInformacion { get; set; }
+        public int IdTipoInformacion { get; set; }
 
         public bool Borrado { get; set; }
     }

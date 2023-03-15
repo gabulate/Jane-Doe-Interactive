@@ -131,6 +131,7 @@ namespace Infrastructure.Repository
                 {
                     oIncidente.Estado = incidente.Estado;
 
+                    oIncidente.EstadoIncidente = new RepositoryEstadoIncidente().GetEstadoById(oIncidente.Estado);
                     ctx.Incidente.Add(oIncidente);
                     ctx.Entry(oIncidente).State = EntityState.Modified;
                     retorno = ctx.SaveChanges();
