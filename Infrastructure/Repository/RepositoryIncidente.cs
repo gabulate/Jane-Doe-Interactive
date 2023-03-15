@@ -122,12 +122,13 @@ namespace Infrastructure.Repository
 
                 if (oIncidente == null)
                 {
+                    incidente.IdUsuario = 1;
                     ctx.Incidente.Add(incidente);
                     retorno = ctx.SaveChanges();
                 }
                 else
                 {
-                    ctx.Incidente.Add(incidente);
+                    //ctx.Incidente.Add(incidente);
                     ctx.Entry(incidente).State = EntityState.Modified;
                     retorno = ctx.SaveChanges();
                 }
