@@ -139,6 +139,8 @@ namespace Web.Controllers
                     }
                     else
                     {
+                        ViewBag.IdTipoInformacion = listTipos();
+
                         return View("Create", info);
                     }
                 }

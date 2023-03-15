@@ -64,11 +64,11 @@ namespace Web.Controllers
             return View();
         }
 
-        private SelectList listEstados(int idTipo = 0)
+        private SelectList listEstados(int IdEstadoIncidente = 0)
         {
             IServiceEstadoIncidente _Service = new ServiceEstadoIncidente();
             IEnumerable<EstadoIncidente> lista = _Service.GetEstadoIncidente();
-            return new SelectList(lista, "Id", "Descripcion", idTipo);
+            return new SelectList(lista, "Id", "Descripcion", IdEstadoIncidente);
         }
 
         // GET: Incidente/Create
@@ -76,22 +76,6 @@ namespace Web.Controllers
         {
             ViewBag.IdEstadoIncidente = listEstados();
             return View();
-        }
-
-        // POST: Incidente/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
         }
 
         // GET: Incidente/Edit/5
@@ -129,22 +113,6 @@ namespace Web.Controllers
             }
         }
 
-        // POST: Incidente/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
         // GET: Incidente/Delete/5
         public ActionResult Delete(int id)
         {
@@ -170,10 +138,12 @@ namespace Web.Controllers
                     //Lógica para cargar vista correspondiente
                     if (incidente.Id > 0)
                     {
-                        return (ActionResult)View("Edit", incidente);
+                        ViewBag.IdEstadoIncidente = listEstados(incidente.Estado);
+                        return View("Edit", incidente);
                     }
                     else
                     {
+                        ViewBag.IdEstadoIncidente = listEstados(incidente.Estado);
                         return View("Create", incidente);
                     }
                 }

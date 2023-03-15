@@ -58,6 +58,7 @@ namespace Infrastructure.Models
     {
         public int Id { get; set; }
 
+        [Required(ErrorMessage = "{0} es un dato requerido")]
         [Display(Name = "Descripción")]
         public string Descripcion { get; set; }
        
@@ -70,6 +71,7 @@ namespace Infrastructure.Models
         public bool Borrado { get; set; }
 
         [Display(Name = "Rubros de Cobro")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
         public virtual ICollection<RubroCobro> RubroCobro { get; set; }
 
     }
@@ -93,7 +95,7 @@ namespace Infrastructure.Models
 
         [DisplayFormat(DataFormatString = "{0:C}")]
         //[RegularExpression(@"^[0-9]+(\.[0-9]{1,2})?$", ErrorMessage = "Solo se aceptan números con dos decimales y con punto.")]
-        //[Required(ErrorMessage = "{0} es un dato requerido")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
         public decimal Costo { get; set; }
     }
 
@@ -134,11 +136,13 @@ namespace Infrastructure.Models
     {
         public int Id { get; set; }
 
+        [Required(ErrorMessage = "{0} es un dato requerido")]
         public string Texto { get; set; }
 
         [Display(Name = "Documento")]
         public byte[] Doc1 { get; set; }
 
+        [Required(ErrorMessage = "{0} es un dato requerido")]
         [Display(Name = "Tipo de información")]
         public int TipoInformacion { get; set; }
 
@@ -149,11 +153,17 @@ namespace Infrastructure.Models
     {
         public int Id { get; set; }
         public int IdUsuario { get; set; }
+
         [Display(Name = "Título")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
         public string Titulo { get; set; }
+
+        [Required(ErrorMessage = "{0} es un dato requerido")]
         [Display(Name = "Descripción")]
         public string Descripcion { get; set; }
+
         public int Estado { get; set; }
+
         public bool Borrado { get; set; }
 
         public virtual EstadoIncidente EstadoIncidente { get; set; }
