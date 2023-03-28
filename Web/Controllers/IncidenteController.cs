@@ -148,6 +148,10 @@ namespace Web.Controllers
                         return View("Create", incidente);
                     }
                 }
+                //
+                //Hay que hacer que si se creó, vuelva al index normal
+                //y si se editó que vuelva al IndexMante
+                //
                 return RedirectToAction("IndexMante");
             }
             catch (Exception ex)

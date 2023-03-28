@@ -122,6 +122,7 @@ namespace Infrastructure.Repository
 
                 if (oIncidente == null)
                 {
+                    incidente.Estado = 1;
                     incidente.IdUsuario = 1;
                     ctx.Incidente.Add(incidente);
                     retorno = ctx.SaveChanges();
