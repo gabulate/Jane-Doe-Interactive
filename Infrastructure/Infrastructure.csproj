@@ -136,6 +136,7 @@
     <Compile Include="Repository\RepositoryRubroCobro.cs" />
     <Compile Include="Repository\RepositoryTipoInformacion.cs" />
     <Compile Include="Repository\RepositoryUsuario.cs" />
+    <Compile Include="Utils\Cryptography.cs" />
     <Compile Include="Utils\Log.cs" />
   </ItemGroup>
   <ItemGroup>

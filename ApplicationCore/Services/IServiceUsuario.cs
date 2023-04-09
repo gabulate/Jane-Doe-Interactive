@@ -14,5 +14,6 @@ namespace ApplicationCore.Services
         Usuario GetUsuarioById(int id);
         void DeleteUsuario(int id);
         Usuario Save(Usuario usuario);
+        Usuario GetUsuario(string email, string contrasenna);
     }
 }

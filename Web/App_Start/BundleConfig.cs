@@ -22,8 +22,12 @@ namespace Web
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/sweetalert").Include("~/Scripts/sweetalert.min.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap-journal.min.css"
+                      "~/Content/bootstrap-journal.min.css",
+                      "~/Content/jquery-ui.css",
+                      "~/Content/sweetalert.css"
                       //"~/Content/site.css"
                       ));
         }
