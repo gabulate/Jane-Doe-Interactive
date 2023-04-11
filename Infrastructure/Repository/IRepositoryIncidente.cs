@@ -13,6 +13,6 @@ namespace Infrastructure.Repository
         IEnumerable<Incidente> GetIncidente();
         Incidente GetIncidenteById(int id);
         void DeleteIncidente(int id);
-        Incidente Save(Incidente incidente);
+        Incidente Save(Incidente incidente, int idUsuario);
     }
 }

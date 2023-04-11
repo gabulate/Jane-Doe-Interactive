@@ -111,7 +111,7 @@ namespace Infrastructure.Repository
             }
         }
 
-        public Incidente Save(Incidente incidente)
+        public Incidente Save(Incidente incidente, int idUsuario)
         {
             int retorno = 0;
             Incidente oIncidente = null;
@@ -123,7 +123,7 @@ namespace Infrastructure.Repository
                 if (oIncidente == null)
                 {
                     incidente.Estado = 1;
-                    incidente.IdUsuario = 1;
+                    incidente.IdUsuario = idUsuario;
                     ctx.Incidente.Add(incidente);
                     retorno = ctx.SaveChanges();
                 }

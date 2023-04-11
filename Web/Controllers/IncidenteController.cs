@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using Web.Security;
 
 namespace Web.Controllers
 {
@@ -16,12 +17,18 @@ namespace Web.Controllers
         // GET: Incidente
         public ActionResult Index()
         {
-
+            int idUsuario = 1;
+            if (Session["User"] != null)
+            {
+                Usuario usuario = (Usuario)Session["User"];
+                idUsuario = usuario.Id;
+            }
             IEnumerable<Incidente> lista = null;
             try
             {
                 IServiceIncidente _Servicio = new ServiceIncidente();
-                lista = _Servicio.GetIncidenteByUsuario(1);
+                //lista = _Servicio.GetIncidenteByUsuario(1);
+                lista = _Servicio.GetIncidenteByUsuario(idUsuario);
                 ViewBag.title = "Lista Incidentes";
                 //Lista RubrosCobro
                 return View(lista);
@@ -36,6 +43,7 @@ namespace Web.Controllers
             }
         }
 
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult IndexMante()
         {
 
@@ -58,11 +66,7 @@ namespace Web.Controllers
             }
         }
 
-        // GET: Incidente/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+       
 
         private SelectList listEstados(int IdEstadoIncidente = 0)
         {
@@ -113,21 +117,22 @@ namespace Web.Controllers
             }
         }
 
-        // GET: Incidente/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+       
         [HttpPost]
         public ActionResult Save(Incidente incidente)
         {
             IServiceIncidente _Service = new ServiceIncidente();
-            
+            int idUsuario=1;
+            if (Session["User"] != null)
+            {
+                Usuario usuario = (Usuario)Session["User"];
+                idUsuario = usuario.Id;
+            }
             try
             {
                 if (ModelState.IsValid)
                 {
-                    Incidente oIncidente = _Service.Save(incidente);
+                    Incidente oIncidente = _Service.Save(incidente,idUsuario);
                 }
                 else
                 {
@@ -152,7 +157,7 @@ namespace Web.Controllers
                 //Hay que hacer que si se creó, vuelva al index normal
                 //y si se editó que vuelva al IndexMante
                 //
-                return RedirectToAction("IndexMante");
+                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
@@ -164,20 +169,6 @@ namespace Web.Controllers
             }
         }
 
-        // POST: Incidente/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        
     }
 }

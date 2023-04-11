@@ -8,11 +8,13 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using Web.Security;
 
 namespace Web.Controllers
 {
     public class HomeController : Controller
     {
+
         public ActionResult Index()
         {
 
@@ -35,6 +37,29 @@ namespace Web.Controllers
             }
         }
 
+        //[CustomAuthorize((int)Roles.Administrador)]
+        public ActionResult IndexAdmin()
+        {
+
+            IEnumerable<Informacion> lista = null;
+            try
+            {
+                IServiceInformacion _ServicioPlanCobro = new ServiceInformacion();
+                lista = _ServicioPlanCobro.GetInformacion();
+                ViewBag.title = "Lista Información";
+                //Lista RubrosCobro
+                return View(lista);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult IndexMante()
         {
 

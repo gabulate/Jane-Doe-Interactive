@@ -20,7 +20,7 @@ namespace Infrastructure.Repository
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    //Obtener todos los Usuarios incluyendo el autor
+                    //Obtener todos los Usuarios incluyendo el tipoUsuario
                     lista = ctx.Usuario.Include("TipoUsuario")
                         .ToList();
 

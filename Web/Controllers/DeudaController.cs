@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using Web.Security;
 using Web.Utils;
 
 namespace Web.Controllers
@@ -13,6 +14,7 @@ namespace Web.Controllers
     public class DeudaController : Controller
     {
         // GET: Deuda
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Index()
         {
             IEnumerable<Residencia> lista = null;

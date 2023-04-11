@@ -34,10 +34,10 @@ namespace ApplicationCore.Services
             return repository.GetIncidenteByUsuario(idUsuario);
         }
 
-        public Incidente Save(Incidente incidente)
+        public Incidente Save(Incidente incidente, int idUsuario)
         {
             IRepositoryIncidente repository = new RepositoryIncidente();
-            return repository.Save(incidente);
+            return repository.Save(incidente, idUsuario);
         }
     }
 }

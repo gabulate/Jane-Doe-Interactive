@@ -5,41 +5,88 @@
 }
 
 
-<h2>Novedades</h2>
+<h2 class="pt-3 pb-2">Información para residentes</h2>
 
 <p>
-    <a href="@Url.Action("Create", "Home")" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Crear </a>
+    <a href="@Url.Action("Create", "Home")" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Crear</a>
     @*@Html.ActionLink("Crear", "Create")*@
 </p>
 
-<div class="row">
-    <div class="col-lg-3">
-        <div class="list-group">
+<div class="row no-gutters">
 
+    @*IZQUIERDA*@
+    <div class="col-xl-6 no-gutters h-md-100">
+        <div class="d-md-flex h-md-100 align-items-center pt-2 justify-content-center">
+            <div id="resultado" class="px-2 row">
 
-        </div>
-    </div>
+                <div id="" class="p-3 titulo">
+                    <h2>Advertencias</h2>
+                </div>
 
-    <div class="col-lg-9">
-        <div id="resultado" class="row">
-            @foreach (var item in Model)
-            {
-                <div class="col-sm-3">
-                    <div class="card">
+                @foreach (var item in Model)
+                {
 
-                        <div class="card-body">
-                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.TipoInformacion.Descripcion)</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">  @Html.DisplayFor(modelItem => item.Texto)</h6>
-                            <a href="@Url.Action("Edit", "Home", new {id=item.Id})"
-                               class="btn btn-primary">Editar</a>
-                            @if (item.Doc1 != null)
-                            {
-                                <a href="@Url.Action("DescargarArchivo", "Home", new {id=item.Id})">Descargar archivo</a>
-                            }
+                    if (item.TipoInformacion.Descripcion.Equals("Advertencia"))
+                    {
+
+                        <div class="col-sm-6">
+                            <div class="card">
+
+                                <div class="card-body">
+
+                                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.TipoInformacion.Descripcion)</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">  @Html.DisplayFor(modelItem => item.Texto)</h6>
+                                    <a href="@Url.Action("Edit", "Home", new {id=item.Id})"
+                                       class="btn btn-primary">Editar</a>
+                                    @if (item.Doc1 != null)
+                                    {
+                                        <a href="@Url.Action("DescargarArchivo", "Home", new {id=item.Id})"><i class="fa-solid fa-file-arrow-down"></i></a>
+                                    }
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>      }
+                    }
+                }
+            </div>
         </div>
     </div>
+
+    @*DERECHA*@
+    <div class="col-xl-6 no-gutters h-md-100">
+        <div class="d-md-flex h-md-100 align-items-center pt-2 justify-content-center">
+            <div id="resultado" class="px-2 row">
+
+                <div id="" class="p-3 titulo">
+                    <h2>Avisos</h2>
+                </div>
+                @foreach (var item in Model)
+                {
+
+                    if (item.TipoInformacion.Descripcion.Equals("Aviso"))
+                    {
+
+                        <div class="col-sm-6">
+                            <div class="card">
+
+                                <div class="card-body">
+
+                                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.TipoInformacion.Descripcion)</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">  @Html.DisplayFor(modelItem => item.Texto)</h6>
+                                    <a href="@Url.Action("Edit", "Home", new {id=item.Id})"
+                                       class="btn btn-primary">Editar</a>
+                                    @if (item.Doc1 != null)
+                                    {
+                                        <a class="btn btn-primary" href="@Url.Action("DescargarArchivo", "Home", new {id=item.Id})"><i class="fa-solid fa-file-arrow-down p-1"></i>Descargar</a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+
+            </div>
+        </div>
+    </div>
+
 </div>
 
