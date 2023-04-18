@@ -23,7 +23,7 @@ namespace Web.Controllers
                 IServiceResidencia _ServiceResidencia = new ServiceResidencia();
                 lista = _ServiceResidencia.GetResidencia();
                 ViewBag.title = "Lista Residencias";
-                
+
                 return View(lista);
             }
             catch (Exception ex)
@@ -67,8 +67,8 @@ namespace Web.Controllers
                 // Salvar el error en un archivo 
                 Log.Error(ex, MethodBase.GetCurrentMethod());
                 TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                TempData["Redirect"] = "Libro";
-                TempData["Redirect-Action"] = "IndexAdmin";
+                TempData["Redirect"] = "Deuda";
+                TempData["Redirect-Action"] = "Index";
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
             }
@@ -77,25 +77,71 @@ namespace Web.Controllers
         // GET: Deuda/Create
         public ActionResult Create()
         {
+            ViewBag.idPlanCobro = listPlanCobro();
+            ViewBag.idResidencia = listResidencia();
             return View();
+        }
+
+        private SelectList listPlanCobro(int IdPlanCobro = 0)
+        {
+            IServicePlanCobro _ServicePlanCobro = new ServicePlanCobro();
+            IEnumerable<PlanCobro> lista = _ServicePlanCobro.GetPlanCobro();
+            return new SelectList(lista, "Id", "Descripcion", IdPlanCobro);
+
+        }
+
+        private SelectList listResidencia(int IdResidencia = 0)
+        {
+            IServiceResidencia _ServiceResidencia = new ServiceResidencia();
+            IEnumerable<Residencia> lista = _ServiceResidencia.GetResidencia();
+            return new SelectList(lista, "Id", "Propietario", IdResidencia);
+
         }
 
         // POST: Deuda/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Save(Deuda deuda)
         {
+            IServiceDeuda _ServiceDeuda = new ServiceDeuda();
             try
             {
-                // TODO: Add insert logic here
+                if (ModelState.IsValid)
+                {
+                    Deuda oDeuda = _ServiceDeuda.Save(deuda);
+                }
+                else
+                {
+                    // Valida Errores si Javascript está deshabilitado
+                    Utils.Util.ValidateErrors(this);
 
+                    //Cargar la vista crear o actualizar
+                    //Lógica para cargar vista correspondiente
+                    if (deuda.Id > 0)
+                    {
+                        return (ActionResult)View("Edit", deuda);
+                    }
+                    else
+                    {
+                        ViewBag.idPlanCobro = listPlanCobro(deuda.IdPlanCobro);
+                        ViewBag.idResidencia = listResidencia(deuda.IdResidencia);
+                        return View("Create", deuda);
+                    }
+                }
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Deuda";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
             }
         }
 
+        #region Edit
         // GET: Deuda/Edit/5
         public ActionResult Edit(int id)
         {
@@ -118,6 +164,9 @@ namespace Web.Controllers
             }
         }
 
+        #endregion
+
+        #region Delete
         // GET: Deuda/Delete/5
         public ActionResult Delete(int id)
         {
@@ -139,5 +188,6 @@ namespace Web.Controllers
                 return View();
             }
         }
+        #endregion
     }
 }

@@ -41,9 +41,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Deuda.FirstOrDefault().PendientePago)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.Deuda.FirstOrDefault().MontoPagado)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Deuda.FirstOrDefault().PlanCobro.MontoTotal)
             </th>
@@ -61,9 +61,9 @@
                 <td>
                     @Html.Encode(item.PendientePago ? "Pendiente" : "Pagado")
                 </td>
-                <td>
+                @*<td>
                     @Html.DisplayFor(modelItem => item.MontoPagado)
-                </td>
+                </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.PlanCobro.MontoTotal)
                 </td>
@@ -76,7 +76,7 @@
 
 <div class="form-group">
     <div class="btn-group" role="group">
-        @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
+        @*@Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })*@
         @Html.ActionLink("Regresar al listado", "Index", null, new { @class = "btn btn-secondary" })
     </div>
 </div>

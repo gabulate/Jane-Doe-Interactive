@@ -1,0 +1,140 @@
+﻿@model Infrastructure.Models.Deuda
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Estado de Cuenta</h2>
+
+@using (Html.BeginForm("Save", "Deuda", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.IdResidencia, "IdResidencia", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("IdResidencia", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IdResidencia, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IdPlanCobro, "IdPlanCobro", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("IdPlanCobro", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IdPlanCobro, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Fecha, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="input-group date" id="fecha">
+                    <input type="text" class="form-control" name="fecha" placeholder="Seleccione una fecha" />
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                    </span>
+                </div>
+                @*<input type="text" class="form-control datepicker" id="fecha" name="fecha" placeholder="Seleccione una fecha" />*@
+                @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <hr />
+        <div class="form-group">
+            <div class="btn-group" role="group">
+                <input type="submit" value="Crear" class="btn btn-primary" />
+                @Html.ActionLink("Regresar al listado", "Index", null, new { @class = "btn btn-secondary" })
+            </div>
+        </div>
+    </div>
+
+}
+
+@section Scripts{
+    <!--<script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+    <script src="~/Scripts/locales/bootstrap-datepicker.es.min.js" charset="UTF-8"></script>-->
+    <!-- Agrega el archivo para el idioma español -->
+    <!--<script type="text/javascript">
+
+        // Obtiene la fecha actual
+        var today = new Date();
+
+        // Configura el Datepicker con opciones y establece la fecha actual como predeterminada
+        $('#fecha').datepicker({
+            format: 'dd/mm/yyyy',
+            language: 'es',
+            autoclose: true,
+            todayHighlight: true,
+            startDate: today,
+            endDate: '+1y',
+        }).datepicker('setDate', today);
+
+        // Crea un evento de cambio de fecha que se activa cuando se selecciona otra fecha
+        $('#fecha').datepicker().on('changeDate', function (e) {
+            var selectedDate = e.date;
+            console.log("La fecha seleccionada es: " + selectedDate);
+        });
+    </script>-->
+
+    <link href="~/Content/bootstrap-datepicker.min.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+    <script src="~/Scripts/locales/bootstrap-datepicker.es.min.js" charset="UTF-8"></script> <!-- Agrega el archivo para el idioma español -->
+    <script type="text/javascript">
+
+        // Obtiene la fecha actual
+        var today = new Date();
+
+        // Configura el Datepicker con opciones y establece la fecha actual como predeterminada
+        $('#fecha').datepicker({
+            format: 'dd/mm/yyyy',
+            language: 'es',
+            autoclose: true,
+            todayHighlight: true,
+            startDate: today,
+            endDate: '+1y',
+        }).datepicker('setDate', today);
+
+        // Crea un evento de cambio de fecha que se activa cuando se selecciona otra fecha
+        $('#fecha').datepicker().on('changeDate', function (e) {
+            var selectedDate = e.date;
+            console.log("La fecha seleccionada es: " + selectedDate);
+        });
+    </script>
+
+
+
+}
+
+
+
+@*<div class="form-group">
+        @Html.LabelFor(model => model.PendientePago, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.PendientePago)
+                @Html.ValidationMessageFor(model => model.PendientePago, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>*@
+
+@*<div class="form-group">
+        @Html.LabelFor(model => model.MontoPagado, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.MontoPagado, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.MontoPagado, "", new { @class = "text-danger" })
+        </div>
+    </div>*@
+
+@*<div class="form-group">
+        @Html.LabelFor(model => model.Borrado, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.Borrado)
+                @Html.ValidationMessageFor(model => model.Borrado, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>*@

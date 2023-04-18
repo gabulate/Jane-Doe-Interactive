@@ -80,7 +80,45 @@ namespace Infrastructure.Repository
 
         public Deuda Save(Deuda deuda)
         {
-            throw new NotImplementedException();
+            int retorno = 0;
+            Deuda oDeuda = null;
+            using (MyContext ctx = new MyContext())
+            {
+                ctx.Configuration.LazyLoadingEnabled = false;
+                oDeuda = GetDeudaById(deuda.Id);
+
+                //Si ya hay una entrada con el mes y el año igual en la misma residencia, entonces no se agrega
+                if (oDeuda == null)
+                {
+                    bool existeEntrada = ctx.Deuda
+                                        .Where(d => d.IdResidencia == deuda.IdResidencia)
+                                        .Any(d => d.Fecha.Month == deuda.Fecha.Month &&
+                                                  d.Fecha.Year == deuda.Fecha.Year);
+                    // de lo contrario, se agrega
+                    if (!existeEntrada)
+                    {
+                        deuda.PendientePago= true; //valor default: todos los pagos estarán pendientes hasta que se modifique manualmente
+                        deuda.MontoPagado = 0;
+                        ctx.Deuda.Add(deuda);
+                        retorno = ctx.SaveChanges();
+                    }
+                    
+                    
+                }
+                else
+                {
+                    //ctx.Incidente.Add(incidente);
+                    ctx.Entry(deuda).State = EntityState.Modified;
+                    retorno = ctx.SaveChanges();
+                }
+
+            }
+
+            if (retorno >= 0)
+            {
+                oDeuda = GetDeudaById(deuda.Id);
+            }
+            return oDeuda;
         }
     }
 }

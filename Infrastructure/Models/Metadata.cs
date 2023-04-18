@@ -36,20 +36,39 @@ namespace Infrastructure.Models
     }
     internal partial class UsuarioMetadata
     {
+
         public int Id { get; set; }
+
+        [Display(Name = "Tipo de Usuario")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
         public int IdTipoUsuario { get; set; }
 
-        [Display(Name = "Propietario")]
+        [Display(Name = "Nombre de Propietario")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
         public string Nombre { get; set; }
+
+        [Required(ErrorMessage = "{0} es un dato requerido")]
         public string Apellido { get; set; }
+
+        [Display(Name = "Cédula")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
+        [RegularExpression(@"^[0-9]+(\[0-9]{9})?$", ErrorMessage = "solo acepta 9 digitos")]
+
         public int Cedula { get; set; }
+
+        [Display(Name = "Correo electrónico")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
         public string Email { get; set; }
+
+        [Display(Name = "Contraseña")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
         public string Contrasenna { get; set; }
 
         public virtual ICollection<Residencia> Residencia { get; set; }
 
         public virtual TipoUsuario TipoUsuario { get; set; }
 
+        [Display(Name = "Estado")]
         public bool Borrado { get; set; }
 
 
@@ -60,8 +79,9 @@ namespace Infrastructure.Models
 
         [Required(ErrorMessage = "{0} es un dato requerido")]
         [Display(Name = "Descripción")]
+        [RegularExpression(@"(\s*(\S)\s*){4,}", ErrorMessage = "La descripción del plan de cobro requiere un mínimo de 4 caracteres")]
         public string Descripcion { get; set; }
-       
+
 
         [Display(Name = "Monto Total")]
         [DisplayFormat(DataFormatString = "{0:C}")]  //para agregar signo de colones. el 0 reemplaza con el valor que representa. El C representa el signo de de colones
@@ -85,12 +105,13 @@ namespace Infrastructure.Models
         public bool Borrado { get; set; }
     }
 
-    internal partial class RubroCobroMetadata 
+    internal partial class RubroCobroMetadata
     {
         public int Id { get; set; }
 
         [Display(Name = "Descripción")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
+        [RegularExpression(@"(\s*(\S)\s*){4,}", ErrorMessage = "La descripción del rubro de cobro requiere un mínimo de 4 caracteres")]
         public string Descripcion { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:C}")]
@@ -137,6 +158,7 @@ namespace Infrastructure.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "{0} es un dato requerido")]
+        [RegularExpression(@"(\s*(\S)\s*){10,}", ErrorMessage = "El contenido requiere un mínimo de 10 caracteres")]
         public string Texto { get; set; }
 
         [Display(Name = "Documento")]
@@ -155,10 +177,12 @@ namespace Infrastructure.Models
 
         [Display(Name = "Título")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
+        [RegularExpression(@"(\s*(\S)\s*){4,}", ErrorMessage = "El título requiere un mínimo de 4 caracteres")]
         public string Titulo { get; set; }
 
         [Required(ErrorMessage = "{0} es un dato requerido")]
         [Display(Name = "Descripción")]
+        [RegularExpression(@"(\s*(\S)\s*){10,}", ErrorMessage = "La descripción requiere un mínimo de 10 caracteres")]
         public string Descripcion { get; set; }
 
         public int Estado { get; set; }
@@ -177,4 +201,15 @@ namespace Infrastructure.Models
         public string Descripcion { get; set; }
         public bool Borrado { get; set; }
     }
+    internal partial class TipoUsuarioMetadata
+    {
+        public int Id { get; set; }
+
+        [Display(Name = "Descripción")]
+        public string Descripcion { get; set; }
+        public bool Borrado { get; set; }
+    }
+
 }
+
+
