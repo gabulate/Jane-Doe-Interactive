@@ -1,61 +1,42 @@
-﻿@model Infrastructure.Models.Reservacion
+﻿@model IEnumerable<Infrastructure.Models.Reservacion>
 
 @{
-    Layout = null;
+    ViewBag.Title = "Index";
 }
 
-<!DOCTYPE html>
+<h2>Mis reservaciones</h2>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <div>
-        <h4>Reservacion</h4>
-        <hr />
-        <dl class="dl-horizontal">
+<p>
+    <a href="@Url.Action("Create", "Reservacion")" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Agregar </a>
+</p>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.AreaComun.Descripcion)
-            </dt>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AreaComun.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HoraInicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HoraFinal)
+        </th>
+        <th></th>
+    </tr>
 
-            <dd>
-                @Html.DisplayFor(model => model.AreaComun.Descripcion)
-            </dd>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AreaComun.Descripcion)
+        </td>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Usuario.Nombre)
-            </dt>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoraInicio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoraFinal)
+        </td>
+    </tr>
+}
 
-            <dd>
-                @Html.DisplayFor(model => model.Usuario.Nombre)
-            </dd>
-
-
-            <dt>
-                @Html.DisplayNameFor(model => model.HoraInicio)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.HoraInicio)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.HoraFinal)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.HoraFinal)
-            </dd>
-
-
-        </dl>
-    </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
-</body>
-</html>
+</table>

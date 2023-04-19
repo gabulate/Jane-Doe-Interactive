@@ -1,0 +1,77 @@
+﻿@model Infrastructure.Models.Reservacion
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Reservar área común</h2>
+
+@using (Html.BeginForm(Html.BeginForm("Save", "Reservacion", FormMethod.Post, new { enctype = "multipart/form-data" })))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.IdAreaComun, "IdAreaComun", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("IdAreaComun", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IdAreaComun, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HoraInicio, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class='input-group date form_datetime1'>
+                    @Html.EditorFor(model => model.HoraInicio, new { htmlAttributes = new { @class = "form-control" } })
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+                @Html.ValidationMessageFor(model => model.HoraInicio, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HoraFinal, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class='input-group date form_datetime2'>
+                    @Html.EditorFor(model => model.HoraFinal, new { htmlAttributes = new { @class = "form-control" } })
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+                @Html.ValidationMessageFor(model => model.HoraFinal, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <hr />
+        <div class="form-group">
+            <div class="btn-group" role="group">
+                <input type="submit" value="Reservar" class="btn btn-primary" />
+                @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-secondary" })
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts{
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+
+    <script type="text/javascript">
+        $(function () {
+            $('.form_datetime1').datetimepicker({
+                format: 'LT'
+                });
+        });
+
+        $(function () {
+            $('.form_datetime2').datetimepicker({
+                format: 'LT'
+                });
+        });
+    </script>
+}
