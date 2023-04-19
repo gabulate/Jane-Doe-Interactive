@@ -108,6 +108,18 @@ namespace Web.Controllers
                 if (ModelState.IsValid)
                 {
                     Deuda oDeuda = _ServiceDeuda.Save(deuda);
+
+                    if (oDeuda == null)
+                    {
+                        TempData["mensaje"] = "Plan de Cobro no asignado. No se puede repetir el mes para el residente seleccionado. ";
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        TempData["mensaje"] = "El plan de cobro se ha asignado correctamente";
+                        return RedirectToAction("Index");
+                    }
+
                 }
                 else
                 {

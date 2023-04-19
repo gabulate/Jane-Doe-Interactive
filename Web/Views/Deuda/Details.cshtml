@@ -41,12 +41,13 @@
             <th>
                 @Html.DisplayNameFor(model => model.Deuda.FirstOrDefault().PendientePago)
             </th>
-            @*<th>
+            <th>
                 @Html.DisplayNameFor(model => model.Deuda.FirstOrDefault().MontoPagado)
-            </th>*@
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Deuda.FirstOrDefault().PlanCobro.MontoTotal)
             </th>
+             <th></th>
         </tr>
 
         @foreach (var item in Model.Deuda)
@@ -61,11 +62,15 @@
                 <td>
                     @Html.Encode(item.PendientePago ? "Pendiente" : "Pagado")
                 </td>
-                @*<td>
-                    @Html.DisplayFor(modelItem => item.MontoPagado)
-                </td>*@
+                <td>
+                @Html.DisplayFor(modelItem => item.MontoPagado)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.PlanCobro.MontoTotal)
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", "Deuda", new {id=item.Id})"
+                       class="btn btn-primary">Editar</a>
                 </td>
             </tr>
         }

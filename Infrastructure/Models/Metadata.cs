@@ -27,7 +27,8 @@ namespace Infrastructure.Models
         [Display(Name = "Cantidad de Vehículos")]
         public byte Vehiculos { get; set; }
 
-
+        [Display(Name = "Descripción de Residencia")]
+        public string Descripcion { get; set; }
         public virtual Usuario Usuario { get; set; }
 
         [Display(Name = "Historial")]
