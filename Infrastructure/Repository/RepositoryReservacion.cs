@@ -25,10 +25,10 @@ namespace Infrastructure.Repository
                     //Obtiene las reservaciones que tengan la misma fecha, ya sea de inicio o final
                     lista = ctx.Reservacion
                         .Where(x => x.IdAreaComun == reservacion.IdAreaComun)
-                        .Where(x => x.HoraInicio.Date == reservacion.HoraInicio.Date || 
+                        /*.Where(x => x.HoraInicio.Date == reservacion.HoraInicio.Date || 
                         x.HoraInicio.Date == reservacion.HoraFinal.Date ||
                         x.HoraFinal.Date == reservacion.HoraInicio.Date ||
-                        x.HoraFinal.Date == reservacion.HoraFinal.Date)
+                        x.HoraFinal.Date == reservacion.HoraFinal.Date)*/
                         .Include("AreaComun")
                         .Include("Usuario")
                         .ToList();

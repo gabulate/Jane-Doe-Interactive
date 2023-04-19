@@ -61,8 +61,8 @@ namespace ApplicationCore.Services
             }
 
             //Obtiene las horas de apertura y cierre del área común
-            TimeSpan horaApertura = reservacion.AreaComun.HoraAbierto;
-            TimeSpan horaCierre = reservacion.AreaComun.HoraCierre;
+            TimeSpan horaApertura = new ServiceAreaComun().GetAreaComunByID(reservacion.IdAreaComun).HoraAbierto;
+            TimeSpan horaCierre = new ServiceAreaComun().GetAreaComunByID(reservacion.IdAreaComun).HoraCierre;
 
             //Obtiene las horas reservadas para hacer comparaciones
             TimeSpan horaInicio = reservacion.HoraInicio.TimeOfDay;

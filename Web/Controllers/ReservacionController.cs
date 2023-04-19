@@ -13,6 +13,52 @@ namespace Web.Controllers
 {
     public class ReservacionController : Controller
     {
+        [HttpPost]
+        public ActionResult Save(Reservacion reserva)
+        {
+            IServiceReservacion _Service = new ServiceReservacion();
+            try
+            {
+                ModelState.Remove("Borrado");
+
+                if (ModelState.IsValid)
+                {
+                    Usuario usuario = (Usuario)Session["User"];
+                    Reservacion oReservacion = _Service.Save(reserva, usuario.Id);
+                }
+                else
+                {
+                    // Valida Errores si Javascript está deshabilitado
+                    Utils.Util.ValidateErrors(this);
+
+                    //Cargar la vista crear o actualizar
+                    //Lógica para cargar vista correspondiente
+                    if (reserva.Id > 0)
+                    {
+                        return (ActionResult)View("Edit", reserva);
+                    }
+                    else
+                    {
+                        ViewBag.idAreaComun = listAreaComun();
+                        return View("Create", reserva);
+                    }
+                }
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                // Redireccion a la captura del Error
+
+                ViewBag.NotificationMessage = Utils.SweetAlertHelper.Mensaje("No se ha podido crear la reservación",
+                            ex.Message, Utils.SweetAlertMessageType.error
+                            );
+                ViewBag.idAreaComun = listAreaComun();
+                return View("Create", reserva);
+            }
+        }
+
         // GET: Incidente/Create
         public ActionResult Create()
         {
