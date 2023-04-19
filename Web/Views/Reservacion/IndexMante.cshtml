@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Infrastructure.Models.Reservacion>
+
+@{
+    ViewBag.Title = "IndexMante";
+}
+
+<h2>Todas las reservaciones</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AreaComun.Descripcion)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Usuario.Nombre)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.HoraInicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HoraFinal)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AreaComun.Descripcion)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Usuario.Nombre)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.HoraInicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoraFinal)
+            </td>
+        </tr>
+    }
+
+</table>

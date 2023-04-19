@@ -210,6 +210,40 @@ namespace Infrastructure.Models
         public bool Borrado { get; set; }
     }
 
+    internal partial class ReservacionMetadata
+    {
+        public int Id { get; set; }
+
+        [Display(Name = "Área común")]
+        public int IdAreaComun { get; set; }
+        public int IdUsuario { get; set; }
+
+        [Display(Name = "Hora de inicio")]
+        [DisplayFormat(DataFormatString = "{0:HH:mm dd/MM/yyyy}")]
+        public System.DateTime HoraInicio { get; set; }
+        [Display(Name = "Hora final")]
+        [DisplayFormat(DataFormatString = "{0:HH:mm dd/MM/yyyy}")]
+        public System.DateTime HoraFinal { get; set; }
+        public bool Borrado { get; set; }
+
+        [Display(Name = "Área común")]
+        public virtual AreaComun AreaComun { get; set; }
+    }
+
+    internal partial class AreaComunMetadata
+    {
+        public int Id { get; set; }
+
+        [Display(Name = "Área común")]
+        public string Descripcion { get; set; }
+
+        [Display(Name = "Hora de apertura")]
+        public System.TimeSpan HoraAbierto { get; set; }
+
+        [Display(Name = "Hora de cierre")]
+        public System.TimeSpan HoraCierre { get; set; }
+        public bool Borrado { get; set; }
+    }
 }
 
 

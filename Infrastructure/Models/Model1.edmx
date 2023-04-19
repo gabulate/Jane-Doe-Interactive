@@ -90,8 +90,8 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdAreaComun" Type="int" Nullable="false" />
           <Property Name="IdUsuario" Type="int" Nullable="false" />
-          <Property Name="HoraInicio" Type="time" Precision="7" Nullable="false" />
-          <Property Name="HoraFinal" Type="time" Precision="7" Nullable="false" />
+          <Property Name="HoraInicio" Type="datetime" Nullable="false" />
+          <Property Name="HoraFinal" Type="datetime" Nullable="false" />
           <Property Name="Borrado" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Residencia">
@@ -455,8 +455,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdAreaComun" Type="Int32" Nullable="false" />
           <Property Name="IdUsuario" Type="Int32" Nullable="false" />
-          <Property Name="HoraInicio" Type="Time" Nullable="false" Precision="7" />
-          <Property Name="HoraFinal" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="HoraInicio" Type="DateTime" Nullable="false" />
+          <Property Name="HoraFinal" Type="DateTime" Nullable="false" />
           <Property Name="Borrado" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="AreaComun" Relationship="Self.FK_Reservacion_AreaComun" FromRole="Reservacion" ToRole="AreaComun" />
           <NavigationProperty Name="Usuario" Relationship="Self.FK_Reservacion_Usuario" FromRole="Reservacion" ToRole="Usuario" />
