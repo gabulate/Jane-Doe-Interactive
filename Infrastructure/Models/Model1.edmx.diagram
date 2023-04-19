@@ -29,7 +29,7 @@
         <AssociationConnector Association="CondominiosDBModel.FK_Residencia_Usuario" ManuallyRouted="false" />
         <AssociationConnector Association="CondominiosDBModel.FK_Usuario_TipoUsuario" ManuallyRouted="false" />
         <AssociationConnector Association="CondominiosDBModel.PlanCobro_RubroCobro" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="CondominiosDBModel.sysdiagrams" Width="1.5" PointX="10.375" PointY="0.75" />
+        <EntityTypeShape EntityType="CondominiosDBModel.sysdiagrams" Width="1.5" PointX="10.25" PointY="0.625" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

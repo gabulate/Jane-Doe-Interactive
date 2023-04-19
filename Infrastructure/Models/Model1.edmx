@@ -105,6 +105,7 @@
           <Property Name="Condicion" Type="int" Nullable="false" />
           <Property Name="Vehiculos" Type="tinyint" Nullable="false" />
           <Property Name="Borrado" Type="bit" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="RubroCobro">
           <Key>
@@ -129,7 +130,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Borrado" Type="bit" Nullable="false" />
         </EntityType>
@@ -151,7 +152,7 @@
           <Property Name="Apellido" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Cedula" Type="int" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Contrasenna" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Contrasenna" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Borrado" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_Deuda_PlanCobro">
@@ -474,6 +475,7 @@
           <NavigationProperty Name="CondicionResidencia" Relationship="Self.FK_Residencia_CondicionResidencia" FromRole="Residencia" ToRole="CondicionResidencia" />
           <NavigationProperty Name="Deuda" Relationship="Self.FK_Deuda_Residencia" FromRole="Residencia" ToRole="Deuda" />
           <NavigationProperty Name="Usuario" Relationship="Self.FK_Residencia_Usuario" FromRole="Residencia" ToRole="Usuario" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="RubroCobro">
           <Key>
@@ -810,6 +812,7 @@
           <EntitySetMapping Name="Residencia">
             <EntityTypeMapping TypeName="CondominiosDBModel.Residencia">
               <MappingFragment StoreEntitySet="Residencia">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Propietario" ColumnName="Propietario" />
                 <ScalarProperty Name="Habitantes" ColumnName="Habitantes" />

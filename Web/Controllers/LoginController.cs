@@ -24,9 +24,12 @@ namespace Web.Controllers
             Usuario oUsuario = null;
             try
             {
-                ModelState.Remove("Nombre");
-                ModelState.Remove("Apellidos");
+                ModelState.Remove("Id");
                 ModelState.Remove("IdTipoUsuario");
+                ModelState.Remove("Nombre");
+                ModelState.Remove("Apellido");
+                ModelState.Remove("Cedula");
+                ModelState.Remove("Borrado");
                 //Verificar las credenciales
                 if (ModelState.IsValid)
                 {

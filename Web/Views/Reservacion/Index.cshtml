@@ -1,0 +1,61 @@
+﻿@model Infrastructure.Models.Reservacion
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        <h4>Reservacion</h4>
+        <hr />
+        <dl class="dl-horizontal">
+
+            <dt>
+                @Html.DisplayNameFor(model => model.AreaComun.Descripcion)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.AreaComun.Descripcion)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Usuario.Nombre)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Usuario.Nombre)
+            </dd>
+
+
+            <dt>
+                @Html.DisplayNameFor(model => model.HoraInicio)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.HoraInicio)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.HoraFinal)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.HoraFinal)
+            </dd>
+
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

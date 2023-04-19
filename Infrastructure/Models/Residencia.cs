@@ -11,7 +11,8 @@ namespace Infrastructure.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Residencia
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -27,6 +28,7 @@ namespace Infrastructure.Models
         public int Condicion { get; set; }
         public byte Vehiculos { get; set; }
         public Nullable<bool> Borrado { get; set; }
+        public string Descripcion { get; set; }
     
         public virtual CondicionResidencia CondicionResidencia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

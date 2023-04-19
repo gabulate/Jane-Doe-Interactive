@@ -24,7 +24,12 @@ namespace Web.Controllers
                 IServiceInformacion _ServicioPlanCobro = new ServiceInformacion();
                 lista = _ServicioPlanCobro.GetInformacion();
                 ViewBag.title = "Lista Información";
-                //Lista RubrosCobro
+                if(TempData["mensaje"] != null)
+                {
+                    ViewBag.NotificationMessage = TempData["mensaje"];
+                }
+
+
                 return View(lista);
             }
             catch (Exception ex)

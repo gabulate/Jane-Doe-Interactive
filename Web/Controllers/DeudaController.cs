@@ -94,7 +94,7 @@ namespace Web.Controllers
         {
             IServiceResidencia _ServiceResidencia = new ServiceResidencia();
             IEnumerable<Residencia> lista = _ServiceResidencia.GetResidencia();
-            return new SelectList(lista, "Id", "Propietario", IdResidencia);
+            return new SelectList(lista, "Id", "Descripcion", IdResidencia);
 
         }
 
