@@ -14,6 +14,7 @@ namespace Web.Controllers
     public class UsuarioController : Controller
     {
         // GET: Usuario
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Index()
         {
             IEnumerable<Usuario> lista = null;
@@ -30,15 +31,18 @@ namespace Web.Controllers
             }
             catch (Exception ex)
             {
+               
                 Log.Error(ex, MethodBase.GetCurrentMethod());
                 TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-
+                TempData["Redirect"] = "Usuario";
+                TempData["Redirect-Action"] = "Index";
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
             }
         }
 
         // GET: Usuario/Details/5
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Details(int? id)
         {
             IServiceUsuario _ServiceUsuario = new ServiceUsuario();
@@ -73,17 +77,18 @@ namespace Web.Controllers
         }
 
         // GET: Usuario/Create
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Create()
         {
-            ViewBag.idTipoUsuario = listTipoUsuario();
+            ViewBag.vbidTipoUsuario = listTipoUsuario();
             return View();
         }
 
-        private SelectList listTipoUsuario(int idTipoUsuario = 0)
+        private SelectList listTipoUsuario(int valorSeleccionado = 0)
         {
             IServiceTipoUsuario _ServiceTipoUsuario = new ServiceTipoUsuario();
             IEnumerable<TipoUsuario> lista = _ServiceTipoUsuario.GetTipoUsuario();
-            return new SelectList(lista, "Id", "Descripcion", idTipoUsuario);
+            return new SelectList(lista, "Id", "Descripcion", valorSeleccionado);
         }
 
         // POST: Usuario/Create CREAR O ACTUALIZAR
@@ -94,6 +99,16 @@ namespace Web.Controllers
             IServiceUsuario _ServiceUsuario = new ServiceUsuario();
             try
             {
+
+               // ModelState.Remove("Id");
+               //ModelState.Remove("IdTipoUsuario");
+
+                //ModelState.Remove("Nombre");
+                //ModelState.Remove("Apellido");
+                //ModelState.Remove("Email");
+                //ModelState.Remove("Cedula");
+                //ModelState.Remove("Contrasenna");
+
                 if (ModelState.IsValid)
                 {
                     Usuario oUsuarioI = _ServiceUsuario.Save(usuario);
@@ -102,17 +117,17 @@ namespace Web.Controllers
                 {
                     // Valida Errores si Javascript está deshabilitado
                     Utils.Util.ValidateErrors(this);
-                    ViewBag.idTipoUsuario = listTipoUsuario(usuario.IdTipoUsuario);
+                    ViewBag.vbidTipoUsuario = listTipoUsuario(usuario.IdTipoUsuario);
                     //Cargar la vista crear o actualizar
                     //Lógica para cargar vista correspondiente
                     if (usuario.Id > 0)
                     {
-                        ViewBag.idTipoUsuario = listTipoUsuario(usuario.IdTipoUsuario);
+                        ViewBag.vbidTipoUsuario = listTipoUsuario(usuario.IdTipoUsuario);
                         return View("Edit", usuario);
                     }
                     else
                     {
-                        ViewBag.idTipoUsuario = listTipoUsuario(usuario.IdTipoUsuario);
+                        ViewBag.vbidTipoUsuario = listTipoUsuario(usuario.IdTipoUsuario);
                         return View("Create", usuario);
                     }
                 }
@@ -121,20 +136,23 @@ namespace Web.Controllers
             catch (Exception ex)
             {
                 Log.Error(ex, MethodBase.GetCurrentMethod());
-                TempData["Message"] = "RubroCobro";
-                TempData["Redirect-Action"] = "IndexAdmin";
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect-Action"] = "Index";
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
             }
+
         }
 
         // GET: Usuario/Edit/5
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Edit(int? id)
         {
             IServiceUsuario _ServiceUsuario = new ServiceUsuario();
             Usuario usuario = null;
             try
             {
+
                 if (id == null)
                 {
                     return RedirectToAction("Index");
@@ -148,6 +166,7 @@ namespace Web.Controllers
                     // Redireccion a la captura del Error
                     return RedirectToAction("Default", "Error");
                 }
+                ViewBag.vbidTipoUsuario = listTipoUsuario(usuario.IdTipoUsuario);
                 return View(usuario);
             }
             catch (Exception ex)
@@ -162,28 +181,5 @@ namespace Web.Controllers
             }
         }
 
-        #region delete
-        // GET: Usuario/Delete/5
-        //public ActionResult Delete(int id)
-        //{
-        //    return View();
-        //}
-
-        //// POST: Usuario/Delete/5
-        //[HttpPost]
-        //public ActionResult Delete(int id, FormCollection collection)
-        //{
-        //    try
-        //    {
-        //        // TODO: Add delete logic here
-
-        //        return RedirectToAction("Index");
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
-        #endregion
     }
 }

@@ -38,6 +38,7 @@ namespace Web.Controllers
         }
 
         // GET: Deuda/Details/5
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Details(int? id)
         {
             ServiceResidencia _ServiceResidencia = new ServiceResidencia();
@@ -75,6 +76,7 @@ namespace Web.Controllers
         }
 
         // GET: Deuda/Create
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Create()
         {
             ViewBag.idPlanCobro = listPlanCobro();
@@ -139,7 +141,6 @@ namespace Web.Controllers
                         return View("Create", deuda);
                     }
                 }
-                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {

@@ -38,6 +38,7 @@ namespace Web.Controllers
         }
 
         // GET: RubroCobro/Details/5
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Details(int? id)
         {
             ServiceRubroCobro _ServiceRubroCobro = new ServiceRubroCobro();
@@ -72,12 +73,14 @@ namespace Web.Controllers
         }
 
         // GET: RubroCobro/Create
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Create()
         {
             return View();
         }
 
         // POST: RubroCobro/Create CREAR O ACTUALIZAR
+        [CustomAuthorize((int)Roles.Administrador)]
         [HttpPost]
         public ActionResult Save(RubroCobro rubro)
         {
@@ -118,6 +121,7 @@ namespace Web.Controllers
         }
 
         // GET: RubroCobro/Edit/5
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Edit(int? id)
         {
             ServiceRubroCobro _ServiceRubroCobro = new ServiceRubroCobro();
@@ -151,6 +155,7 @@ namespace Web.Controllers
             }
         }
 
+        #region Delete
 
         // GET: RubroCobro/Delete/5
         public ActionResult Delete(int id)
@@ -173,5 +178,6 @@ namespace Web.Controllers
                 return View();
             }
         }
+        #endregion
     }
 }

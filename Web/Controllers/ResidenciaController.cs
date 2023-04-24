@@ -40,6 +40,7 @@ namespace Web.Controllers
         }
 
         // GET: Residencia/Details/5
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Details(int? id)
         {
             ServiceResidencia _ServiceResidencia = new ServiceResidencia();
@@ -75,8 +76,18 @@ namespace Web.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
+        private SelectList listPropietarios(int idPropietario = 0)
+        {
+            IServiceUsuario _ServiceUsuario = new ServiceUsuario();
+            IEnumerable<Usuario> lista = _ServiceUsuario.GetUsuario();
+            return new SelectList(lista, "Id", "Nombre", idPropietario);
+        }
+
+
+
 
         // GET: Residencia/Create
+
         public ActionResult Create()
         {
             return View();
@@ -99,13 +110,7 @@ namespace Web.Controllers
             }
         }
 
-        private SelectList listPropietarios(int idPropietario = 0)
-        {
-            IServiceUsuario _ServiceUsuario = new ServiceUsuario();
-            IEnumerable<Usuario> lista = _ServiceUsuario.GetUsuario();
-            return new SelectList(lista, "Id", "Nombre", idPropietario);
-        }
-
+      
         // GET: Residencia/Edit/5
         public ActionResult Edit(int id)
         {
@@ -128,6 +133,7 @@ namespace Web.Controllers
             }
         }
 
+        #region Delete
         // GET: Residencia/Delete/5
         public ActionResult Delete(int id)
         {
@@ -149,5 +155,6 @@ namespace Web.Controllers
                 return View();
             }
         }
+        #endregion
     }
 }

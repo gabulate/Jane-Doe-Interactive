@@ -42,28 +42,7 @@ namespace Web.Controllers
             }
         }
 
-        //[CustomAuthorize((int)Roles.Administrador)]
-        public ActionResult IndexAdmin()
-        {
-
-            IEnumerable<Informacion> lista = null;
-            try
-            {
-                IServiceInformacion _ServicioPlanCobro = new ServiceInformacion();
-                lista = _ServicioPlanCobro.GetInformacion();
-                ViewBag.title = "Lista Información";
-                //Lista RubrosCobro
-                return View(lista);
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex, MethodBase.GetCurrentMethod());
-                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-
-                // Redireccion a la captura del Error
-                return RedirectToAction("Default", "Error");
-            }
-        }
+       
         [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult IndexMante()
         {
@@ -94,6 +73,7 @@ namespace Web.Controllers
             return new SelectList(lista, "Id", "Descripcion", idTipo);
         }
 
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Edit(int? id)
         {
             IServiceInformacion _ServiceInformacion = new ServiceInformacion();
@@ -128,6 +108,7 @@ namespace Web.Controllers
             }
         }
 
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Create()
         {
             Informacion info = new Informacion()

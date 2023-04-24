@@ -61,8 +61,8 @@
                     @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
                 @*<a href="@Url.Action("Details", "Usuario", new {id=item.Id})"
                     class="btn btn-primary">Detalles</a>*@
-                @*<a href="@Url.Action("Edit", "Usuario", new {id=item.Id})"
-                    class="btn btn-primary">Editar</a>*@
+                <a href="@Url.Action("Edit", "Usuario", new {id=item.Id})"
+                    class="btn btn-primary">Editar</a>
             </td>
         </tr>
     }

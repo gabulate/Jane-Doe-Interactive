@@ -40,6 +40,7 @@ namespace Web.Controllers
         }
 
         // GET: PlanCobro/Details/5
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Details(int? id)
         {
             ServicePlanCobro _ServicePlanCobro = new ServicePlanCobro();
@@ -74,6 +75,7 @@ namespace Web.Controllers
         }
 
         // GET: PlanCobro/Create
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Create()
         {
             ViewBag.idRubro = listRubros();
@@ -95,6 +97,7 @@ namespace Web.Controllers
 
 
         // GET: PlanCobro/Edit/5
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Edit(int? id)
         {
             ServicePlanCobro _ServicePlanCobro = new ServicePlanCobro();
@@ -134,6 +137,7 @@ namespace Web.Controllers
         }
 
         // POST: PlanCobro/Edit/5
+        [CustomAuthorize((int)Roles.Administrador)]
         [HttpPost]
         public ActionResult Save(PlanCobro plan, string[] selectedRubrosCobro)
         {
@@ -177,7 +181,7 @@ namespace Web.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
-
+        #region Delete
         // GET: PlanCobro/Delete/5
         public ActionResult Delete(int id)
         {
@@ -199,5 +203,6 @@ namespace Web.Controllers
                 return View();
             }
         }
+        #endregion
     }
 }

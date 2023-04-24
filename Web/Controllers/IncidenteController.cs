@@ -15,6 +15,7 @@ namespace Web.Controllers
     public class IncidenteController : Controller
     {
         // GET: Incidente
+
         public ActionResult Index()
         {
             int idUsuario = 1;
@@ -76,6 +77,7 @@ namespace Web.Controllers
         }
 
         // GET: Incidente/Create
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Create()
         {
             ViewBag.IdEstadoIncidente = listEstados();
@@ -83,6 +85,7 @@ namespace Web.Controllers
         }
 
         // GET: Incidente/Edit/5
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Edit(int? id)
         {
             IServiceIncidente _Service = new ServiceIncidente();

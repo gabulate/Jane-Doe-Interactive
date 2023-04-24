@@ -89,7 +89,9 @@ namespace Infrastructure.Repository
                     }
                     else
                     {
+                        
                         ctx.Entry(usuario).State = EntityState.Modified;
+                       
                     }
                     retorno = ctx.SaveChanges();
                 }
@@ -120,7 +122,7 @@ namespace Infrastructure.Repository
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
                     oUsuario = ctx.Usuario.
-                     Where(p => p.Email.Equals(email) && p.Contrasenna == contrasenna).
+                     Where(p => p.Email.Equals(email) && p.Contrasenna == contrasenna && p.Borrado == false).
                     FirstOrDefault<Usuario>();
                 }
                 if (oUsuario != null)
