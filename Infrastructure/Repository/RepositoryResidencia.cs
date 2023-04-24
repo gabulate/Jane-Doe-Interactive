@@ -82,7 +82,33 @@ namespace Infrastructure.Repository
 
         public Residencia Save(Residencia residencia)
         {
-            throw new NotImplementedException();
+            int retorno = 0;
+            Residencia oResidencia = null;
+            using(MyContext ctx= new MyContext())
+            {
+                ctx.Configuration.LazyLoadingEnabled = false;
+                oResidencia = GetResidenciaById(residencia.Id);
+
+                if(oResidencia == null)
+                {
+                    residencia.Condicion = 3; //Condición: "En venta"
+                    residencia.Propietario = 14; //Usuario de la dueña del condominio: Jane Doe
+                    residencia.AnioConstrucion = null;
+                    residencia.Habitantes = 0;
+                    ctx.Residencia.Add(residencia);
+                    retorno = ctx.SaveChanges();
+                }
+                else
+                {
+                    ctx.Entry(residencia).State=EntityState.Modified;
+                    retorno = ctx.SaveChanges();
+                }
+            }
+            if(retorno >= 0)
+            {
+                oResidencia = GetResidenciaById(residencia.Id);
+            }
+            return oResidencia;
         }
     }
 }

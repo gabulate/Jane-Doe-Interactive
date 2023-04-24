@@ -83,55 +83,103 @@ namespace Web.Controllers
             return new SelectList(lista, "Id", "Nombre", idPropietario);
         }
 
-
-
+        private SelectList listCondicionResidencia(int condicion = 0)
+        {
+            IServiceCondicionResidencia _ServiceCondicionResidencia = new ServiceCondicionResidencia();
+            IEnumerable<CondicionResidencia> lista = _ServiceCondicionResidencia.GetCondicionResidencia();
+            return new SelectList(lista, "Id", "Descripcion", condicion);
+        }
 
         // GET: Residencia/Create
-
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Create()
         {
+            ViewBag.CondicionResidencia = listCondicionResidencia();
+            ViewBag.listaUsuarios = listPropietarios();
             return View();
         }
 
         // POST: Residencia/Create
         //establece la lógica cuando se crea un libro
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Save(Residencia residencia)
         {
+            IServiceResidencia _ServiceResidencia = new ServiceResidencia();
             try
             {
-                ViewBag.idPropietario = listPropietarios();
-
-                return View();
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-      
-        // GET: Residencia/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Residencia/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
+                if(ModelState.IsValid)
+                {
+                    Residencia oResidencia = _ServiceResidencia.Save(residencia);
+                }
+                else
+                {
+                    Utils.Util.ValidateErrors(this);
+                    ViewBag.CondicionResidencia= listCondicionResidencia(residencia.Condicion);
+                    if(residencia.Id > 0)
+                    {
+                        ViewBag.CondicionResidencia = listCondicionResidencia(residencia.Condicion);
+                        ViewBag.listaUsuarios = listPropietarios(residencia.Propietario);
+                        //return View("Edit", residencia);
+                        return (ActionResult)View("Edit", residencia);
+                    }
+                    else
+                    {
+                        ViewBag.CondicionResidencia = listCondicionResidencia(residencia.Condicion);
+                        ViewBag.listaUsuarios = listPropietarios(residencia.Propietario);
+                        return View("Create", residencia);
+                    }
+                }
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Residencia";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
             }
         }
+
+
+        // GET: Residencia/Edit/5
+       // [CustomAuthorize((int)Roles.Administrador)]
+        public ActionResult Edit(int? id)
+        {
+            IServiceResidencia _ServiceResidencia = new ServiceResidencia();
+            Residencia residencia = null;
+            try
+            {
+                if(id== null)
+                {
+                    return RedirectToAction("Index");
+                }
+                residencia = _ServiceResidencia.GetResidenciaById(Convert.ToInt32(id));
+                if(residencia == null)
+                {
+                    TempData["Message"] = "No existe el incidente solicitado";
+                    TempData["Redirect"] = "Residencia";
+                    TempData["Redirect-Action"] = "Index";
+                    // Redireccion a la captura del Error
+                    return RedirectToAction("Default", "Error");
+                }
+                ViewBag.CondicionResidencia = listCondicionResidencia(residencia.Condicion);
+                ViewBag.listaUsuarios = listPropietarios(residencia.Propietario);
+                return View(residencia);
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Home";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
+
+       
 
         #region Delete
         // GET: Residencia/Delete/5

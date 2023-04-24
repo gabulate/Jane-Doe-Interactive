@@ -28,6 +28,7 @@ namespace Infrastructure.Models
         public byte Vehiculos { get; set; }
 
         [Display(Name = "Descripción de Residencia")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
         public string Descripcion { get; set; }
         public virtual Usuario Usuario { get; set; }
 

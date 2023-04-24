@@ -366,6 +366,8 @@
     <Content Include="Views\Reservacion\IndexMante.cshtml" />
     <Content Include="Views\Reservacion\Create.cshtml" />
     <Content Include="Views\Usuario\Create.cshtml" />
+    <Content Include="Views\Residencia\Create.cshtml" />
+    <Content Include="Views\Residencia\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
