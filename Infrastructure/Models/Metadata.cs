@@ -117,7 +117,7 @@ namespace Infrastructure.Models
         public string Descripcion { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:C}")]
-        //[RegularExpression(@"^[0-9]+(\.[0-9]{1,2})?$", ErrorMessage = "Solo se aceptan números con dos decimales y con punto.")]
+        [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})?$", ErrorMessage = "Solo se aceptan números con dos decimales y con punto.")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public decimal Costo { get; set; }
     }
