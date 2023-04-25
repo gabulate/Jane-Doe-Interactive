@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using Web.ViewModel;
 
 namespace Web.Controllers
 {
@@ -45,6 +46,10 @@ namespace Web.Controllers
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
             }
+        }
+        public ActionResult graficoOrden()
+        {
+            
         }
     }
 }
