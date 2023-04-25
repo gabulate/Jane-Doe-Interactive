@@ -43,6 +43,13 @@ namespace ApplicationCore.Services
         public Deuda Save(Deuda deuda)
         {
             IRepositoryDeuda rep = new RepositoryDeuda();
+            //IServicePlanCobro _ServicePlanCobro = new ServicePlanCobro();
+            //PlanCobro plan = _ServicePlanCobro.GetPlanCobroByID(deuda.IdPlanCobro);
+            //if(deuda.PendientePago==false)
+            //{
+            //    deuda.MontoPagado = plan.MontoTotal;
+            //}
+            
             return rep.Save(deuda);
         }
     }

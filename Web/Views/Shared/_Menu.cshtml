@@ -19,32 +19,45 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mantenimientos</a>
                             <div class="dropdown-menu">
-                                @Html.ActionLink("Usuarios", "Index", "Usuario",
+                                @Html.ActionLink("Gestión de Usuarios", "Index", "Usuario",
                                                                       null, new { @class = "dropdown-item" })
                                 <div class="dropdown-divider"></div>
-                                @Html.ActionLink("Residencias", "Index", "Residencia",
+                                @Html.ActionLink("Gestión de Residencias", "Index", "Residencia",
                                                                        null, new { @class = "dropdown-item" })
                                 <div class="dropdown-divider"></div>
-                                @Html.ActionLink("Rubros de Cobro", "IndexMante", "RubroCobro",
+                                @Html.ActionLink("Gestión de Rubros de Cobro", "IndexMante", "RubroCobro",
                                                                        null, new { @class = "dropdown-item" })
                                 <div class="dropdown-divider"></div>
-                                @Html.ActionLink("Planes de Cobro", "Index", "PlanCobro",
+                                @Html.ActionLink("Gestión de Planes de Cobro", "Index", "PlanCobro",
                                                                        null, new { @class = "dropdown-item" })
                                 <div class="dropdown-divider"></div>
-                                @Html.ActionLink("Estados de Cuenta", "IndexMante", "Deuda",
+                                @Html.ActionLink("Gestión de Cuentas", "IndexMante", "Deuda",
                                                                        null, new { @class = "dropdown-item" })
                                 <div class="dropdown-divider"></div>
-                                @Html.ActionLink("Información", "IndexMante", "Home",
+                                @Html.ActionLink("Gestión de Información", "IndexMante", "Home",
                                                                        null, new { @class = "dropdown-item" })
                                 <div class="dropdown-divider"></div>
-                                @Html.ActionLink("Incidentes", "IndexMante", "Incidente",
+                                @Html.ActionLink("Gestión de Incidentes", "IndexMante", "Incidente",
                                                                        null, new { @class = "dropdown-item" })
                                 <div class="dropdown-divider"></div>
-                                @Html.ActionLink("Reservaciones", "IndexMante", "Reservacion",
+                                @Html.ActionLink("Gestión de Reservaciones", "IndexMante", "Reservacion",
                                                                        null, new { @class = "dropdown-item" })
 
                             </div>
                         </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reportes</a>
+                            <div class="dropdown-menu">
+                                @Html.ActionLink("Reporte de deudas", "Deudas", "Reporte",
+                                                                      null, new { @class = "dropdown-item" })
+                                <div class="dropdown-divider"></div>
+                                @Html.ActionLink("Reporte de ingresos", "Index", "Residencia",
+                                                                       null, new { @class = "dropdown-item" })
+
+                            </div>
+                        </li>
+
                     }
 
                 }
@@ -53,6 +66,9 @@
 
 
                 @* Texto Usuario, Accion, Controlador*@
+
+
+
                 <li>
                     @Html.ActionLink("Incidencias", "Index", "Incidente",
                     null, new { @class = "nav-link" })
@@ -62,6 +78,8 @@
                     @Html.ActionLink("Reservaciones", "Index", "Reservacion",
                     null, new { @class = "nav-link" })
                 </li>
+
+
 
                 <li>
                     @Html.ActionLink("Estado de Cuenta", "Index", "Deuda",
@@ -107,7 +125,7 @@
                                @*Accion, Controlador*@
                                href="@Url.Action("Index","Login")">
                                 <i class="fa-solid fa-user-plus"></i>
-                                Login
+                                Iniciar sesión
                             </a>
                         }
                         else
@@ -115,7 +133,7 @@
                             <a class="dropdown-item"
                                href="@Url.Action("Logout","Login")">
                                 <i class="fa-solid fa-right-from-bracket"></i>
-                                Logout
+                                Cerrar sesión
                             </a>
                         }
                     </div>

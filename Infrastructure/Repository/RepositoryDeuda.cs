@@ -149,31 +149,32 @@ namespace Infrastructure.Repository
         {
             int retorno = 0;
             Deuda oDeuda = null;
+
+
             using (MyContext ctx = new MyContext())
             {
                 ctx.Configuration.LazyLoadingEnabled = false;
                 oDeuda = GetDeudaById(deuda.Id);
+                IRepositoryPlanCobro _RepositoryPlanCobro= new RepositoryPlanCobro();
 
-                //Si ya hay una entrada con el mes y el año igual en la misma residencia, entonces no se agrega
                 if (oDeuda == null)
                 {
+                    //Busca si hay una entrada con el mes y el año igual en la misma residencia
                     bool existeEntrada = ctx.Deuda
                                         .Where(d => d.IdResidencia == deuda.IdResidencia)
                                         .Any(d => d.Fecha.Month == deuda.Fecha.Month &&
                                                   d.Fecha.Year == deuda.Fecha.Year);
-                    // de lo contrario, se agrega
+                    // si no existe, se agrega
                     if (!existeEntrada)
                     {
                         deuda.PendientePago= true; //valor default: todos los pagos estarán pendientes hasta que se modifique manualmente
-                        deuda.MontoPagado = 0;
                         ctx.Deuda.Add(deuda);
                         retorno = ctx.SaveChanges();
                     }
-                    
-                    
                 }
                 else
                 {
+                    
                     //ctx.Incidente.Add(incidente);
                     ctx.Entry(deuda).State = EntityState.Modified;
                     retorno = ctx.SaveChanges();

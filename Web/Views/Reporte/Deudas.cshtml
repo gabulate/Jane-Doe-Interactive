@@ -4,16 +4,14 @@
     ViewBag.Title = "Deudas";
 }
 
-<h2>Deudas</h2>
+<h2>Listado de cuentas pendientes de pago</h2>
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Fecha)
         </th>
 
-        <th>
-            @Html.DisplayNameFor(model => model.MontoPagado)
-        </th>
+
 
         <th>
             @Html.DisplayNameFor(model => model.PlanCobro.Descripcion)
@@ -30,9 +28,7 @@
             @Html.DisplayFor(modelItem => item.Fecha)
         </td>
 
-        <td>
-            @Html.DisplayFor(modelItem => item.MontoPagado)
-        </td>
+
 
         <td>
             @Html.DisplayFor(modelItem => item.PlanCobro.Descripcion)

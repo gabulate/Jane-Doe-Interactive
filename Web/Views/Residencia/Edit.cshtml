@@ -1,17 +1,16 @@
 ﻿@model Infrastructure.Models.Residencia
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Editar Residencia";
 }
 
-<h2>Edit</h2>
+<h2>Editar Residencia</h2>
 
 @using (Html.BeginForm("Save", "Residencia", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Residencia</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)

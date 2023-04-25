@@ -31,7 +31,6 @@
           <Property Name="IdPlanCobro" Type="int" Nullable="false" />
           <Property Name="Fecha" Type="smalldatetime" Nullable="false" />
           <Property Name="PendientePago" Type="bit" Nullable="false" />
-          <Property Name="MontoPagado" Type="money" Nullable="false" />
           <Property Name="Borrado" Type="bit" Nullable="false" />
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
@@ -115,16 +114,6 @@
           <Property Name="Descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Costo" Type="money" Nullable="false" />
           <Property Name="Borrado" Type="bit" Nullable="false" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="TipoInformacion">
           <Key>
@@ -311,7 +300,6 @@
           <EntitySet Name="Reservacion" EntityType="Self.Reservacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Residencia" EntityType="Self.Residencia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RubroCobro" EntityType="Self.RubroCobro" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoInformacion" EntityType="Self.TipoInformacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
@@ -388,20 +376,6 @@
           <Property Name="Borrado" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Residencia" Relationship="Self.FK_Residencia_CondicionResidencia" FromRole="CondicionResidencia" ToRole="Residencia" />
         </EntityType>
-        <EntityType Name="Deuda">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="IdResidencia" Type="Int32" Nullable="false" />
-          <Property Name="IdPlanCobro" Type="Int32" Nullable="false" />
-          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="PendientePago" Type="Boolean" Nullable="false" />
-          <Property Name="MontoPagado" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <Property Name="Borrado" Type="Boolean" Nullable="false" />
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="PlanCobro" Relationship="Self.FK_Deuda_PlanCobro" FromRole="Deuda" ToRole="PlanCobro" />
-          <NavigationProperty Name="Residencia" Relationship="Self.FK_Deuda_Residencia" FromRole="Deuda" ToRole="Residencia" />
-        </EntityType>
         <EntityType Name="EstadoIncidente">
           <Key>
             <PropertyRef Name="Id" />
@@ -443,8 +417,8 @@
           <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="MontoTotal" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="Borrado" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Deuda" Relationship="Self.FK_Deuda_PlanCobro" FromRole="PlanCobro" ToRole="Deuda" />
           <NavigationProperty Name="RubroCobro" Relationship="Self.PlanCobro_RubroCobro" FromRole="PlanCobro" ToRole="RubroCobro" />
+          <NavigationProperty Name="Deuda" Relationship="CondominiosDBModel.FK_Deuda_PlanCobro" FromRole="PlanCobro" ToRole="Deuda" />
         </EntityType>
         <EntityType Name="Reservacion">
           <Key>
@@ -455,8 +429,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdAreaComun" Type="Int32" Nullable="false" />
           <Property Name="IdUsuario" Type="Int32" Nullable="false" />
-          <Property Name="HoraInicio" Type="DateTime" Nullable="false" />
-          <Property Name="HoraFinal" Type="DateTime" Nullable="false" />
+          <Property Name="HoraInicio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="HoraFinal" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Borrado" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="AreaComun" Relationship="Self.FK_Reservacion_AreaComun" FromRole="Reservacion" ToRole="AreaComun" />
           <NavigationProperty Name="Usuario" Relationship="Self.FK_Reservacion_Usuario" FromRole="Reservacion" ToRole="Usuario" />
@@ -473,9 +447,9 @@
           <Property Name="Vehiculos" Type="Byte" Nullable="false" />
           <Property Name="Borrado" Type="Boolean" />
           <NavigationProperty Name="CondicionResidencia" Relationship="Self.FK_Residencia_CondicionResidencia" FromRole="Residencia" ToRole="CondicionResidencia" />
-          <NavigationProperty Name="Deuda" Relationship="Self.FK_Deuda_Residencia" FromRole="Residencia" ToRole="Deuda" />
           <NavigationProperty Name="Usuario" Relationship="Self.FK_Residencia_Usuario" FromRole="Residencia" ToRole="Usuario" />
           <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Deuda" Relationship="CondominiosDBModel.FK_Deuda_Residencia" FromRole="Residencia" ToRole="Deuda" />
         </EntityType>
         <EntityType Name="RubroCobro">
           <Key>
@@ -543,30 +517,6 @@
             </Principal>
             <Dependent Role="Residencia">
               <PropertyRef Name="Condicion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Deuda_PlanCobro">
-          <End Role="PlanCobro" Type="Self.PlanCobro" Multiplicity="1" />
-          <End Role="Deuda" Type="Self.Deuda" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PlanCobro">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Deuda">
-              <PropertyRef Name="IdPlanCobro" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Deuda_Residencia">
-          <End Role="Residencia" Type="Self.Residencia" Multiplicity="1" />
-          <End Role="Deuda" Type="Self.Deuda" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Residencia">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Deuda">
-              <PropertyRef Name="IdResidencia" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -649,7 +599,6 @@
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AreaComun" EntityType="Self.AreaComun" />
           <EntitySet Name="CondicionResidencia" EntityType="Self.CondicionResidencia" />
-          <EntitySet Name="Deuda" EntityType="Self.Deuda" />
           <EntitySet Name="EstadoIncidente" EntityType="Self.EstadoIncidente" />
           <EntitySet Name="Incidente" EntityType="Self.Incidente" />
           <EntitySet Name="Informacion" EntityType="Self.Informacion" />
@@ -667,14 +616,6 @@
           <AssociationSet Name="FK_Residencia_CondicionResidencia" Association="Self.FK_Residencia_CondicionResidencia">
             <End Role="CondicionResidencia" EntitySet="CondicionResidencia" />
             <End Role="Residencia" EntitySet="Residencia" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Deuda_PlanCobro" Association="Self.FK_Deuda_PlanCobro">
-            <End Role="PlanCobro" EntitySet="PlanCobro" />
-            <End Role="Deuda" EntitySet="Deuda" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Deuda_Residencia" Association="Self.FK_Deuda_Residencia">
-            <End Role="Residencia" EntitySet="Residencia" />
-            <End Role="Deuda" EntitySet="Deuda" />
           </AssociationSet>
           <AssociationSet Name="FK_Incidente_EstadoIncidente" Association="Self.FK_Incidente_EstadoIncidente">
             <End Role="EstadoIncidente" EntitySet="EstadoIncidente" />
@@ -704,18 +645,53 @@
             <End Role="PlanCobro" EntitySet="PlanCobro" />
             <End Role="RubroCobro" EntitySet="RubroCobro" />
           </AssociationSet>
-          <EntitySet Name="sysdiagrams" EntityType="CondominiosDBModel.sysdiagrams" />
+          <EntitySet Name="Deuda" EntityType="CondominiosDBModel.Deuda" />
+          <AssociationSet Name="FK_Deuda_PlanCobro" Association="CondominiosDBModel.FK_Deuda_PlanCobro">
+            <End Role="PlanCobro" EntitySet="PlanCobro" />
+            <End Role="Deuda" EntitySet="Deuda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Deuda_Residencia" Association="CondominiosDBModel.FK_Deuda_Residencia">
+            <End Role="Residencia" EntitySet="Residencia" />
+            <End Role="Deuda" EntitySet="Deuda" />
+          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="sysdiagrams">
+        <EntityType Name="Deuda">
           <Key>
-            <PropertyRef Name="diagram_id" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="IdResidencia" Type="Int32" Nullable="false" />
+          <Property Name="IdPlanCobro" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PendientePago" Type="Boolean" Nullable="false" />
+          <Property Name="Borrado" Type="Boolean" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="PlanCobro" Relationship="CondominiosDBModel.FK_Deuda_PlanCobro" FromRole="Deuda" ToRole="PlanCobro" />
+          <NavigationProperty Name="Residencia" Relationship="CondominiosDBModel.FK_Deuda_Residencia" FromRole="Deuda" ToRole="Residencia" />
         </EntityType>
+        <Association Name="FK_Deuda_PlanCobro">
+          <End Type="CondominiosDBModel.PlanCobro" Role="PlanCobro" Multiplicity="1" />
+          <End Type="CondominiosDBModel.Deuda" Role="Deuda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlanCobro">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Deuda">
+              <PropertyRef Name="IdPlanCobro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Deuda_Residencia">
+          <End Type="CondominiosDBModel.Residencia" Role="Residencia" Multiplicity="1" />
+          <End Type="CondominiosDBModel.Deuda" Role="Deuda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Residencia">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Deuda">
+              <PropertyRef Name="IdResidencia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -739,19 +715,6 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Borrado" ColumnName="Borrado" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Deuda">
-            <EntityTypeMapping TypeName="CondominiosDBModel.Deuda">
-              <MappingFragment StoreEntitySet="Deuda">
-                <ScalarProperty Name="IdResidencia" ColumnName="IdResidencia" />
-                <ScalarProperty Name="IdPlanCobro" ColumnName="IdPlanCobro" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="PendientePago" ColumnName="PendientePago" />
-                <ScalarProperty Name="MontoPagado" ColumnName="MontoPagado" />
-                <ScalarProperty Name="Borrado" ColumnName="Borrado" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -873,14 +836,15 @@
               <ScalarProperty Name="Id" ColumnName="IdRubroCobro" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="CondominiosDBModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
+          <EntitySetMapping Name="Deuda">
+            <EntityTypeMapping TypeName="CondominiosDBModel.Deuda">
+              <MappingFragment StoreEntitySet="Deuda">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Borrado" ColumnName="Borrado" />
+                <ScalarProperty Name="PendientePago" ColumnName="PendientePago" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="IdPlanCobro" ColumnName="IdPlanCobro" />
+                <ScalarProperty Name="IdResidencia" ColumnName="IdResidencia" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -66,8 +66,45 @@ namespace Web.Controllers
         }
 
         // GET: Deuda/Details/5
-        [CustomAuthorize((int)Roles.Administrador)]
+
         public ActionResult Details(int? id)
+        {
+            ServiceResidencia _ServiceResidencia = new ServiceResidencia();
+            Residencia residencia = null;
+            try
+            {
+                //Si va null
+                if (id == null)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                residencia = _ServiceResidencia.GetResidenciaById(Convert.ToInt32(id));
+                if (residencia == null)
+                {
+                    TempData["Message"] = "No existe la residencia solicitado";
+                    TempData["Redirect"] = "Deuda";
+                    TempData["Redirect-Action"] = "Index";
+                    // Redireccion a la captura del Error
+                    return RedirectToAction("Default", "Error");
+                }
+                return View(residencia);
+
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Deuda";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
+
+        [CustomAuthorize((int)Roles.Administrador)]
+        public ActionResult DetailsMante(int? id)
         {
             ServiceResidencia _ServiceResidencia = new ServiceResidencia();
             Residencia residencia = null;
@@ -135,6 +172,7 @@ namespace Web.Controllers
             IServiceDeuda _ServiceDeuda = new ServiceDeuda();
             try
             {
+               
                 if (ModelState.IsValid)
                 {
                     Deuda oDeuda = _ServiceDeuda.Save(deuda);
@@ -142,12 +180,13 @@ namespace Web.Controllers
                     if (oDeuda == null)
                     {
                         TempData["mensaje"] = "Plan de Cobro no asignado. No se puede repetir el mes para el residente seleccionado. ";
-                        return RedirectToAction("Index");
+                        return RedirectToAction("IndexMante");
                     }
                     else
                     {
+
                         TempData["mensaje"] = "El plan de cobro se ha asignado correctamente";
-                        return RedirectToAction("Index");
+                        return RedirectToAction("IndexMante");
                     }
 
                 }
@@ -176,36 +215,54 @@ namespace Web.Controllers
                 Log.Error(ex, MethodBase.GetCurrentMethod());
                 TempData["Message"] = "Error al procesar los datos! " + ex.Message;
                 TempData["Redirect"] = "Deuda";
-                TempData["Redirect-Action"] = "Index";
+                TempData["Redirect-Action"] = "IndexMante";
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
             }
         }
 
-        #region Edit
-        // GET: Deuda/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
 
-        // POST: Deuda/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        // GET: Deuda/Edit/5
+        [CustomAuthorize((int)Roles.Administrador)]
+        public ActionResult Edit(int? id)
         {
+            IServiceDeuda _ServiceDeuda = new ServiceDeuda();
+            Deuda deuda = null;
+
+            //ModelState.Remove("Borrado");
+            //ModelState.Remove("MontoPagado");
+            //ModelState.Remove("Fecha");
+
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                if(id == null)
+                {
+                    return RedirectToAction("IndexMante");
+                }
+                deuda = _ServiceDeuda.GetDeudaById(Convert.ToInt32(id));
+                if(deuda == null )
+                {
+                    TempData["Message"] = "No existe el incidente solicitado";
+                    TempData["Redirect"] = "Deuda";
+                    TempData["Redirect-Action"] = "IndexMante";
+                    // Redireccion a la captura del Error
+                    return RedirectToAction("Default", "Error");
+                }
+                ViewBag.idPlanCobro = listPlanCobro(deuda.IdPlanCobro);
+                ViewBag.idResidencia = listResidencia(deuda.IdResidencia);
+                return View(deuda);
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Deuda";
+                TempData["Redirect-Action"] = "IndexMante";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
             }
         }
-
-        #endregion
 
         #region Delete
         // GET: Deuda/Delete/5

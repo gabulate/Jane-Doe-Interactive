@@ -7,7 +7,6 @@
       <Diagram DiagramId="85849528bda64a8299a4f0fccb6c09c5" Name="Diagram1">
         <EntityTypeShape EntityType="CondominiosDBModel.AreaComun" Width="1.5" PointX="6" PointY="13.125" IsExpanded="true" />
         <EntityTypeShape EntityType="CondominiosDBModel.CondicionResidencia" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="CondominiosDBModel.Deuda" Width="1.5" PointX="7.5" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CondominiosDBModel.EstadoIncidente" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
         <EntityTypeShape EntityType="CondominiosDBModel.Incidente" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="CondominiosDBModel.Informacion" Width="1.5" PointX="10" PointY="9.125" IsExpanded="true" />
@@ -20,8 +19,6 @@
         <EntityTypeShape EntityType="CondominiosDBModel.Usuario" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
         <AssociationConnector Association="CondominiosDBModel.FK_Reservacion_AreaComun" ManuallyRouted="false" />
         <AssociationConnector Association="CondominiosDBModel.FK_Residencia_CondicionResidencia" ManuallyRouted="false" />
-        <AssociationConnector Association="CondominiosDBModel.FK_Deuda_PlanCobro" ManuallyRouted="false" />
-        <AssociationConnector Association="CondominiosDBModel.FK_Deuda_Residencia" ManuallyRouted="false" />
         <AssociationConnector Association="CondominiosDBModel.FK_Incidente_EstadoIncidente" ManuallyRouted="false" />
         <AssociationConnector Association="CondominiosDBModel.FK_Incidente_Usuario" ManuallyRouted="false" />
         <AssociationConnector Association="CondominiosDBModel.FK_Informacion_TipoInformacion" ManuallyRouted="false" />
@@ -29,7 +26,9 @@
         <AssociationConnector Association="CondominiosDBModel.FK_Residencia_Usuario" ManuallyRouted="false" />
         <AssociationConnector Association="CondominiosDBModel.FK_Usuario_TipoUsuario" ManuallyRouted="false" />
         <AssociationConnector Association="CondominiosDBModel.PlanCobro_RubroCobro" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="CondominiosDBModel.sysdiagrams" Width="1.5" PointX="10.25" PointY="0.625" />
+        <EntityTypeShape EntityType="CondominiosDBModel.Deuda" Width="1.5" PointX="8" PointY="1.375" />
+        <AssociationConnector Association="CondominiosDBModel.FK_Deuda_PlanCobro" />
+        <AssociationConnector Association="CondominiosDBModel.FK_Deuda_Residencia" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

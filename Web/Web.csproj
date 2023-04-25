@@ -371,6 +371,8 @@
     <Content Include="Views\Residencia\Edit.cshtml" />
     <Content Include="Views\Deuda\Index.cshtml" />
     <Content Include="Views\Reporte\Deudas.cshtml" />
+    <Content Include="Views\Deuda\Edit.cshtml" />
+    <Content Include="Views\Deuda\DetailsMante.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

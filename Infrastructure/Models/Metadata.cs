@@ -135,10 +135,10 @@ namespace Infrastructure.Models
         [Display(Name = "Pendiente de pago")]
         public bool PendientePago { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:C}")]
-        [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})?$")]
-        [Display(Name = "Monto Pagado")]
-        public decimal MontoPagado { get; set; }
+        //[DisplayFormat(DataFormatString = "{0:C}")]
+        //[RegularExpression(@"^[0-9]+(\.[0-9]{1,2})?$")]
+        //[Display(Name = "Monto Pagado")]
+        //public decimal MontoPagado { get; set; }
 
         public bool Borrado { get; set; }
 

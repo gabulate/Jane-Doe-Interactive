@@ -1,7 +1,7 @@
 ﻿@model Infrastructure.Models.Residencia
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Listado de Cuenta";
 }
 
 <div>
@@ -18,11 +18,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Id)
+            @Html.DisplayNameFor(model => model.Descripcion)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Id)
+            @Html.DisplayFor(model => model.Descripcion)
         </dd>
 
         <dt>
@@ -41,9 +41,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Deuda.FirstOrDefault().PendientePago)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Deuda.FirstOrDefault().MontoPagado)
-            </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.Deuda.FirstOrDefault().PlanCobro.MontoTotal)
             </th>
@@ -62,16 +60,14 @@
                 <td>
                     @Html.Encode(item.PendientePago ? "Pendiente" : "Pagado")
                 </td>
-                <td>
-                @Html.DisplayFor(modelItem => item.MontoPagado)
-                </td>
+
                 <td>
                     @Html.DisplayFor(modelItem => item.PlanCobro.MontoTotal)
                 </td>
-                <td>
+                @*<td>
                     <a href="@Url.Action("Edit", "Deuda", new {id=item.Id})"
                        class="btn btn-primary">Editar</a>
-                </td>
+                </td>*@
             </tr>
         }
 

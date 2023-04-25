@@ -31,7 +31,7 @@ namespace Web.Controllers
                 decimal total = 0;
                 foreach(Deuda de in lista)
                 {
-                    total += (de.PlanCobro.MontoTotal - de.MontoPagado);
+                    total += (de.PlanCobro.MontoTotal);
                 }
                 ViewBag.total = total;
 
