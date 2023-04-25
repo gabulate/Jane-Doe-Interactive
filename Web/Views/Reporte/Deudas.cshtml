@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Infrastructure.Models.Deuda>
+
+@{
+    ViewBag.Title = "Deudas";
+}
+
+<h2>Deudas</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.MontoPagado)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.PlanCobro.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Residencia.Descripcion)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fecha)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.MontoPagado)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.PlanCobro.Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Residencia.Descripcion)
+        </td>
+    </tr>
+}
+
+</table>
+
+Total = @Html.ViewBag.total

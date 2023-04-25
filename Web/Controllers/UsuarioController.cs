@@ -100,14 +100,14 @@ namespace Web.Controllers
             try
             {
 
-               // ModelState.Remove("Id");
-               //ModelState.Remove("IdTipoUsuario");
+                //ModelState.Remove("Id");
+                //ModelState.Remove("IdTipoUsuario");
 
-                //ModelState.Remove("Nombre");
-                //ModelState.Remove("Apellido");
-                //ModelState.Remove("Email");
-                //ModelState.Remove("Cedula");
-                //ModelState.Remove("Contrasenna");
+                ModelState.Remove("Nombre");
+                ModelState.Remove("Apellido");
+                ModelState.Remove("Email");
+                ModelState.Remove("Cedula");
+                ModelState.Remove("Contrasenna");
 
                 if (ModelState.IsValid)
                 {

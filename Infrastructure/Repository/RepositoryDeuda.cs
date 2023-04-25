@@ -48,6 +48,39 @@ namespace Infrastructure.Repository
             }
         }
 
+        public IEnumerable<Deuda> GetDeudaPendiente()
+        {
+            IEnumerable<Deuda> lista = null;
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    //Obtener todos los Usuarios incluyendo el autor
+                    lista = ctx.Deuda
+                        .Where(x => x.PendientePago == true)
+                        .Include("PlanCobro")
+                        .Include("Residencia")
+                        .Include("Residencia.Usuario")
+                        .ToList();
+
+                }
+                return lista;
+            }
+
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        }
 
         public Deuda GetDeudaById(int id)
         {
@@ -64,6 +97,40 @@ namespace Infrastructure.Repository
                 }
                 return deuda;
             }
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        }
+
+        public IEnumerable<Deuda> GetDeudaByUsuario(int id)
+        {
+            IEnumerable<Deuda> lista = null;
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    //Obtener todos los Usuarios incluyendo el autor
+                    lista = ctx.Deuda
+                        .Where(u => u.Residencia.Usuario.Id == id)
+                        .Include("PlanCobro")
+                        .Include("Residencia")
+                        .Include("Residencia.Usuario")
+                        .ToList();
+
+                }
+                return lista;
+            }
+
             catch (DbUpdateException dbEx)
             {
                 string mensaje = "";

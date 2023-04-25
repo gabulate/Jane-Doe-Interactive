@@ -148,6 +148,7 @@
     <Compile Include="Controllers\IncidenteController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PlanCobroController.cs" />
+    <Compile Include="Controllers\ReporteController.cs" />
     <Compile Include="Controllers\ReservacionController.cs" />
     <Compile Include="Controllers\ResidenciaController.cs" />
     <Compile Include="Controllers\RubroCobroController.cs" />
@@ -339,7 +340,7 @@
     <Content Include="Views\Residencia\Details.cshtml" />
     <Content Include="Views\PlanCobro\Index.cshtml" />
     <Content Include="Views\PlanCobro\Details.cshtml" />
-    <Content Include="Views\Deuda\Index.cshtml" />
+    <Content Include="Views\Deuda\IndexMante.cshtml" />
     <Content Include="Views\Deuda\Details.cshtml" />
     <Content Include="Views\RubroCobro\IndexMante.cshtml" />
     <Content Include="Views\RubroCobro\Create.cshtml" />
@@ -368,6 +369,8 @@
     <Content Include="Views\Usuario\Create.cshtml" />
     <Content Include="Views\Residencia\Create.cshtml" />
     <Content Include="Views\Residencia\Edit.cshtml" />
+    <Content Include="Views\Deuda\Index.cshtml" />
+    <Content Include="Views\Reporte\Deudas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

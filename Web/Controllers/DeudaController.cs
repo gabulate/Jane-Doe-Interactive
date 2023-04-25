@@ -13,9 +13,37 @@ namespace Web.Controllers
 {
     public class DeudaController : Controller
     {
+        public ActionResult Index()
+        {
+            IEnumerable<Residencia> lista = null;
+            try
+            {
+                int idUsuario = 1;
+                if (Session["User"] != null)
+                {
+                    Usuario usuario = (Usuario)Session["User"];
+                    idUsuario = usuario.Id;
+                }
+                IServiceResidencia _ServiceResidencia = new ServiceResidencia();
+                lista = _ServiceResidencia.GetResidenciaByUsuario(idUsuario);
+                ViewBag.title = "Lista Residencias";
+
+                return View(lista);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+
+        }
+
         // GET: Deuda
         [CustomAuthorize((int)Roles.Administrador)]
-        public ActionResult Index()
+        public ActionResult IndexMante()
         {
             IEnumerable<Residencia> lista = null;
             try

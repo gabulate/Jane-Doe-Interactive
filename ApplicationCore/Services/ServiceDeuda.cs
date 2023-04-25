@@ -28,6 +28,18 @@ namespace ApplicationCore.Services
             return rep.GetDeudaById(id);
         }
 
+        public IEnumerable<Deuda> GetDeudaByUsuario(int id)
+        {
+            IRepositoryDeuda rep = new RepositoryDeuda();
+            return rep.GetDeudaByUsuario(id);
+        }
+
+        public IEnumerable<Deuda> GetDeudaPendiente()
+        {
+            IRepositoryDeuda rep = new RepositoryDeuda();
+            return rep.GetDeudaPendiente();
+        }
+
         public Deuda Save(Deuda deuda)
         {
             IRepositoryDeuda rep = new RepositoryDeuda();

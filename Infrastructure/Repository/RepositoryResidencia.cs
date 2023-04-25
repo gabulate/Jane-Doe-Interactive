@@ -80,6 +80,41 @@ namespace Infrastructure.Repository
             }
         }
 
+        public IEnumerable<Residencia> GetResidenciaByUsuario(int id)
+        {
+            IEnumerable<Residencia> lista = null;
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    //Obtener todos las residencias incluyendo el propietario
+                    lista = ctx.Residencia
+                        .Where(x => x.Propietario == id)
+                        .Include("Usuario")
+                        .Include("CondicionResidencia")
+                        .Include("Deuda")
+                        .Include("Deuda.PlanCobro")
+                        .ToList();
+
+                }
+                return lista;
+            }
+
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        }
+
         public Residencia Save(Residencia residencia)
         {
             int retorno = 0;

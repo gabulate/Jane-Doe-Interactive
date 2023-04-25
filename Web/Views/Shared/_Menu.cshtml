@@ -31,7 +31,7 @@
                                 @Html.ActionLink("Planes de Cobro", "Index", "PlanCobro",
                                                                        null, new { @class = "dropdown-item" })
                                 <div class="dropdown-divider"></div>
-                                @Html.ActionLink("Estados de Cuenta", "Index", "Deuda",
+                                @Html.ActionLink("Estados de Cuenta", "IndexMante", "Deuda",
                                                                        null, new { @class = "dropdown-item" })
                                 <div class="dropdown-divider"></div>
                                 @Html.ActionLink("Información", "IndexMante", "Home",
@@ -60,6 +60,11 @@
 
                 <li>
                     @Html.ActionLink("Reservaciones", "Index", "Reservacion",
+                    null, new { @class = "nav-link" })
+                </li>
+
+                <li>
+                    @Html.ActionLink("Estado de Cuenta", "Index", "Deuda",
                     null, new { @class = "nav-link" })
                 </li>
 

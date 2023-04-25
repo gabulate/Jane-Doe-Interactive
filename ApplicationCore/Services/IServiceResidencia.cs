@@ -10,6 +10,7 @@ namespace ApplicationCore.Services
     public interface IServiceResidencia
     {
         IEnumerable<Residencia> GetResidencia();
+        IEnumerable<Residencia> GetResidenciaByUsuario(int id);
         Residencia GetResidenciaById(int id);
         void DeleteResidencia(int id);
         Residencia Save(Residencia residencia);

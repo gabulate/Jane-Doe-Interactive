@@ -11,7 +11,9 @@ namespace Infrastructure.Repository
     {
         IEnumerable<Deuda> GetDeuda();
         Deuda GetDeudaById(int id);
+        IEnumerable<Deuda> GetDeudaByUsuario(int id);
         void DeleteDeuda(int id);
         Deuda Save(Deuda deuda);
+        IEnumerable<Deuda> GetDeudaPendiente();
     }
 }
