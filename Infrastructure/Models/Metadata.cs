@@ -28,6 +28,7 @@ namespace Infrastructure.Models
         public byte Vehiculos { get; set; }
 
         [Display(Name = "Descripción de Residencia")]
+        [RegularExpression(@"(\s*(\S)\s*){4,}", ErrorMessage = "La descripción de la residencia requiere un mínimo de 4 caracteres")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public string Descripcion { get; set; }
         public virtual Usuario Usuario { get; set; }
@@ -41,29 +42,29 @@ namespace Infrastructure.Models
 
         public int Id { get; set; }
 
-        [Display(Name = "Tipo de Usuario")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
+        [Display(Name = "Tipo de Usuario")]
         public int IdTipoUsuario { get; set; }
 
-        [Display(Name = "Nombre de Propietario")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
+        [Display(Name = "Nombre de Propietario")]
         public string Nombre { get; set; }
 
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public string Apellido { get; set; }
 
-        [Display(Name = "Cédula")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
+        [Display(Name = "Cédula")]
         [RegularExpression(@"^[0-9]+(\[0-9]{9})?$", ErrorMessage = "solo acepta 9 digitos")]
 
         public int Cedula { get; set; }
 
-        [Display(Name = "Correo electrónico")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
+        [Display(Name = "Correo electrónico")]
         public string Email { get; set; }
 
-        [Display(Name = "Contraseña")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
+        [Display(Name = "Contraseña")]
         public string Contrasenna { get; set; }
 
         public virtual ICollection<Residencia> Residencia { get; set; }

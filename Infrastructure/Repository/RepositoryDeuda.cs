@@ -221,9 +221,9 @@ namespace Infrastructure.Repository
                 else
                 {
                     
-                    //ctx.Incidente.Add(incidente);
-                    ctx.Entry(deuda).State = EntityState.Modified;
-                    retorno = ctx.SaveChanges();
+                        //ctx.Incidente.Add(incidente);
+                        ctx.Entry(deuda).State = EntityState.Modified;
+                        retorno = ctx.SaveChanges();
                 }
 
             }
