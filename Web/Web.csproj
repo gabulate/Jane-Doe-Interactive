@@ -299,6 +299,7 @@
     <Content Include="Content\bootstrap-datepicker.standalone.css.map" />
     <Content Include="Content\bootstrap-datepicker.css.map" />
     <None Include="Scripts\jquery-3.6.3.intellisense.js" />
+    <Content Include="Scripts\graficoChartJS.js" />
     <Content Include="Scripts\jquery-3.6.3.js" />
     <Content Include="Scripts\jquery-3.6.3.min.js" />
     <Content Include="Scripts\jquery-3.6.3.slim.js" />
@@ -450,6 +451,7 @@
     <Content Include="Views\Reporte\Deudas.cshtml" />
     <Content Include="Views\Deuda\Edit.cshtml" />
     <Content Include="Views\Deuda\DetailsMante.cshtml" />
+    <Content Include="Views\Reporte\graficoIngresos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

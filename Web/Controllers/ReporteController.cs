@@ -47,9 +47,20 @@ namespace Web.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
-        public ActionResult graficoOrden()
+        public ActionResult graficoIngresos()
         {
-            
+            IServiceDeuda _ServiceDeuda = new ServiceDeuda();
+            ViewModelGrafico grafico = new ViewModelGrafico();
+            _ServiceDeuda.GetIngresosCountDate(out string etiquetas, out string valores);
+            grafico.Etiquetas = etiquetas;
+            grafico.Valores = valores;
+            int cantidadValores = valores.Split(',').Length;
+            grafico.Colores = string.Join(",", grafico.GenerateColors(cantidadValores));
+            grafico.titulo = "Número del mes";
+            grafico.tituloEtiquetas = "Cantidad de ingresos por mes";
+            grafico.tipo = "bar";
+            ViewBag.grafico = grafico;
+            return View();
         }
     }
 }

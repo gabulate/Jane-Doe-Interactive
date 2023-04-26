@@ -15,5 +15,6 @@ namespace ApplicationCore.Services
         void DeleteDeuda(int id);
         Deuda Save(Deuda deuda);
         IEnumerable<Deuda> GetDeudaPendiente();
+        void GetIngresosCountDate(out string etiquetas, out string valores);
     }
 }

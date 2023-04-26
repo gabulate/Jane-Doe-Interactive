@@ -40,16 +40,17 @@ namespace ApplicationCore.Services
             return rep.GetDeudaPendiente();
         }
 
+        public void GetIngresosCountDate(out string etiquetas1, out string valores1)
+        {
+            IRepositoryDeuda repository = new RepositoryDeuda();
+            repository.GetIngresosCountDate(out string etiquetas, out string valores);
+            etiquetas1 = etiquetas;
+            valores1 = valores;
+        }
+
         public Deuda Save(Deuda deuda)
         {
             IRepositoryDeuda rep = new RepositoryDeuda();
-            //IServicePlanCobro _ServicePlanCobro = new ServicePlanCobro();
-            //PlanCobro plan = _ServicePlanCobro.GetPlanCobroByID(deuda.IdPlanCobro);
-            //if(deuda.PendientePago==false)
-            //{
-            //    deuda.MontoPagado = plan.MontoTotal;
-            //}
-            
             return rep.Save(deuda);
         }
     }

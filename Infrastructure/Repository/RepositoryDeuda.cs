@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,10 +14,7 @@ namespace Infrastructure.Repository
 {
     public class RepositoryDeuda : IRepositoryDeuda
     {
-        public void DeleteDeuda(int id)
-        {
-            throw new NotImplementedException();
-        }
+
 
         public IEnumerable<Deuda> GetDeuda()
         {
@@ -187,6 +186,61 @@ namespace Infrastructure.Repository
                 oDeuda = GetDeudaById(deuda.Id);
             }
             return oDeuda;
+        }
+
+        public void GetIngresosCountDate(out string etiquetas, out string valores)
+        {
+            String varEtiquetas = "";
+            String varValores = "";
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    //Obtener la cantidad de ordenes por fecha
+                    var year = DateTime.Now.Year;
+                    var resultado = ctx.Deuda.Join(ctx.PlanCobro, deuda => deuda.IdPlanCobro,
+                                                                plan => plan.Id,
+                                                                (deuda, plan) => new { Deuda = deuda, PlanCobro = plan })
+                                            .Where(x => !x.Deuda.PendientePago && x.Deuda.Fecha.Year == year)
+                                            .GroupBy(x => x.Deuda.Fecha.Month)
+                                            .Select(group => new
+                                            {
+                                                monto = group.Sum(x => x.PlanCobro.MontoTotal),
+                                                mes = group.Key
+                                            }).ToList();
+                    
+                    //Crear etiquetas y valores
+                    foreach (var item in resultado)
+                    {
+                        varEtiquetas += String.Format("{0}", Convert.ToInt32(item.mes)) + ",";
+                        varValores += item.monto + ",";
+                    }
+                }
+                //Última coma
+                varEtiquetas = varEtiquetas.Substring(0, varEtiquetas.Length - 1); // última coma
+                varValores = varValores.Substring(0, varValores.Length - 1);
+                //Asignar valores de salida
+                etiquetas = varEtiquetas;
+                valores = varValores;
+            }
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+        }
+
+        public void DeleteDeuda(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
