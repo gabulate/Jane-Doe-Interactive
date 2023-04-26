@@ -120,7 +120,6 @@ namespace Web.Controllers
             }
         }
 
-       
         [HttpPost]
         public ActionResult Save(Incidente incidente)
         {

@@ -5,36 +5,94 @@
 }
 
 <h2>Listado de cuentas pendientes de pago</h2>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Fecha)
-        </th>
 
-        <th>
-            @Html.DisplayNameFor(model => model.PlanCobro.Descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Residencia.Descripcion)
-        </th>
-        <th></th>
-    </tr>
+<p>
+    <a href="@Url.Action("DescargarPDF", "Reporte")" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Descargar PDF </a>
+    @*@Html.ActionLink("Crear", "Create")*@
+</p>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Fecha)
-        </td>
+<div class="form-group">
+    @Html.LabelFor(model => model.FirstOrDefault().IdResidencia, "Propietario", htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.DropDownListFor(model => model.FirstOrDefault().Residencia,
+       (SelectList)ViewBag.listResidencia,
+       "Todos",
+        htmlAttributes: new {id="residencias", @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.FirstOrDefault().Residencia, "", new { @class = "text-danger" })
+    </div>
 
-        <td>
-            @Html.DisplayFor(modelItem => item.PlanCobro.Descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Residencia.Descripcion)
-        </td>
-    </tr>
-}
+    Mes
+    <div class="col-md-10">
+        <select id="Meses" class = "form-control" onchange="updateFiltro()" >
+        </select>
+    </div>
+</div>
 
-</table>
+<div id="resultadoDetalle">
 
-Total = @Html.ViewBag.total
+    @Html.Partial("~/Views/Reporte/_CuadroDeudas.cshtml", Model)
+
+
+</div>
+
+@*Scripts*@
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/jqueryajax")
+
+<script type="text/javascript">
+
+    function updateFiltro() {
+        var residencia = document.getElementById("residencias").value;
+        if (!residencia) {
+            residencia = 0;
+        }
+
+        var mes = document.getElementById("Meses").value;
+
+        $.ajax({
+            type: "GET",
+            dataType: 'text',
+            url: "/Reporte/updateFiltroDeuda",
+            data: { "residencia": residencia, "mes": mes },
+            success: function (data) {
+                $("#resultadoDetalle").html('');
+                $("#resultadoDetalle").html(data);
+            }, error: function (xhr, status, error) {
+                console.log("Error: " + error + ", No Error: " + xhr.status);
+            },
+        });
+    }
+</script>
+
+@*Script para llenar el combo de meses*@
+<script type="text/javascript">
+    document.getElementById("residencias").addEventListener('change', function () {
+        updateFiltro();
+    });
+
+    var meses = [
+        { id: 0, nombre: "Todos" },
+        { id: 1, nombre: "Enero" },
+        { id: 2, nombre: "Febrero" },
+        { id: 3, nombre: "Marzo" },
+        { id: 4, nombre: "Abril" },
+        { id: 5, nombre: "Mayo" },
+        { id: 6, nombre: "Junio" },
+        { id: 7, nombre: "Julio" },
+        { id: 8, nombre: "Agosto" },
+        { id: 9, nombre: "Septiembre" },
+        { id: 10, nombre: "Octubre" },
+        { id: 11, nombre: "Noviembre" },
+        { id: 12, nombre: "Diciembre" }
+    ];
+    // Obtener el elemento select del HTML
+    var select = document.getElementById("Meses");
+
+    // Agregar opciones para cada mes
+    for (var i = 0; i < meses.length; i++) {
+        var option = document.createElement("option");
+        option.value = meses[i].id;
+        option.text = meses[i].nombre;
+        select.add(option);
+    }
+</script>

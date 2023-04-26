@@ -40,6 +40,12 @@ namespace ApplicationCore.Services
             return rep.GetDeudaPendiente();
         }
 
+        public IEnumerable<Deuda> GetDeudaPendiente(int idResidencia, int mes)
+        {
+            IRepositoryDeuda rep = new RepositoryDeuda();
+            return rep.GetDeudaPendiente(idResidencia, mes);
+        }
+
         public void GetIngresosCountDate(out string etiquetas1, out string valores1)
         {
             IRepositoryDeuda repository = new RepositoryDeuda();

@@ -15,6 +15,7 @@ namespace Infrastructure.Repository
         void DeleteDeuda(int id);
         Deuda Save(Deuda deuda);
         IEnumerable<Deuda> GetDeudaPendiente();
+        IEnumerable<Deuda> GetDeudaPendiente(int idResidencia, int mes);
         void GetIngresosCountDate(out string etiquetas, out string valores);
     }
 }

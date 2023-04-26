@@ -81,6 +81,53 @@ namespace Infrastructure.Repository
             }
         }
 
+        public IEnumerable<Deuda> GetDeudaPendiente(int idResidencia, int mes)
+        {
+            IEnumerable<Deuda> lista = null;
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    //Obtener todos los Usuarios incluyendo el autor
+                    lista = ctx.Deuda
+                        .Where(x => x.PendientePago == true)
+                        .Include("PlanCobro")
+                        .Include("Residencia")
+                        .Include("Residencia.Usuario")
+                        .ToList();
+
+                    if(idResidencia != 0)
+                    {
+                        lista = lista
+                            .Where(x => x.IdResidencia == idResidencia)
+                            .ToList();
+                    }
+
+                    if(mes != 0)
+                    {
+                        lista = lista
+                            .Where(x => x.Fecha.Month == mes)
+                            .ToList();
+                    }
+                }
+                return lista;
+            }
+
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        }
+
         public Deuda GetDeudaById(int id)
         {
             Deuda deuda = null;

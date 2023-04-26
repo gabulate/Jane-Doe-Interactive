@@ -2,9 +2,9 @@
 
 function grafico(titulo, tituloEtiquetas, tipo, colores, etiquetas, valores) {
 
-    alert("Etiquetas: " + etiquetas);
-    alert("Valores: " + valores);
-    alert("Colores: " + colores);
+    //alert("Etiquetas: " + etiquetas);
+    //alert("Valores: " + valores);
+    //alert("Colores: " + colores);
 
     var data =
     {
